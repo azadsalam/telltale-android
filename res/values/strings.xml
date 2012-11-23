@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, TellTaleActivity!</string>
+    <string name="app_name">Tell Tale</string>
+    <string name="btn_text_reg">Register</string>
+    <string name="btn_text_profile">My Profile</string>
+    <string name="btn_text_onging_list">See Ongoing Stories</string>
+    <string name="btn_text_complete_story_list">See Complete Stories</string>
+    <string name="btn_text_initiate_story">Start your own story</string>
+    <string name="btn_text_login">Log In !</string>
+    <string name="tv_text_username">Mail ID</string>
+    <string name="tv_text_password">Password</string>
+
+</resources>
