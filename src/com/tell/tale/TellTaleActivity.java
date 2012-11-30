@@ -73,6 +73,8 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 		
 		else
 		{
+			Session.nid = (new Integer((String)nid)).intValue();
+			Toast.makeText(this, "Authectication Successful\nnid : "+nid, Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(this,HomeActivity.class);
 			startActivity(intent);
 		}

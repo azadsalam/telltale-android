@@ -1,5 +1,7 @@
 package com.tell.tale;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,21 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class InitiateActivity extends Activity implements OnClickListener {
+public class InitiateActivity extends Activity implements OnClickListener,WebServiceUser 
+{
 
 	Button submit_btn;
 	int nid;
+	String text;
+	HashMap<String, Object> data ;  
+   
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.initiate);
 		
-		Bundle bundle = getIntent().getExtras();
+		//Bundle bundle = getIntent().getExtras();
 		
-		nid = bundle.getInt("nid");
-		
-		
+		//nid = Session.nid;
 		submit_btn = (Button) findViewById(R.id.submit_initiate);
 		
 		submit_btn.setOnClickListener(this);
@@ -32,15 +36,32 @@ public class InitiateActivity extends Activity implements OnClickListener {
 	public void onClick(View v) 
 	{
 		EditText et ;
-		String text;
+		
 		// TODO Auto-generated method stub
 		if(v.getId() == R.id.submit_initiate)
 		{
 			et = (EditText) findViewById(R.id.editText_id_initial);
+			
 			text = et.getText().toString();
+			
+			WebServiceAdapter wsu;
+			data = new HashMap<String, Object>();
+			data.put("nid",Session.nid);
+	    	data.put("text",text);
+	    	//reply tokens
+	        wsu = new WebServiceAdapter(this,this,"Authenticating!!","http://10.0.2.2/telltale/index.php/initiate/androidQuery",data,null);
+			wsu.startWebService();
+			
+			
 			//Toast.makeText(getApplicationContext(), "Story : "+text,	Toast.LENGTH_LONG).show();
 		}
 		
+	}
+
+	public void processResult(HashMap<String, Object> data) 
+	{
+		// TODO Auto-generated method stub
+		Toast.makeText(getApplicationContext(), "Story Initiated\n: "+text,	Toast.LENGTH_LONG).show();
 	}
 
 }

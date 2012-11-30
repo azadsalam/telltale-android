@@ -48,23 +48,27 @@ public class WebServiceAdapter
 	{	
 
 		reply.put("error", false);
-		try 
+		if(replyTokens != null && replyTokens.length>0 && jsonData != null)
 		{
-			JSONObject jsonObject = new JSONObject(jsonData);
-			
-			for(int i=0;i<replyTokens.length;i++)
+		
+			try 
 			{
+				JSONObject jsonObject = new JSONObject(jsonData);
 				
-				reply.put(replyTokens[i], jsonObject.get(replyTokens[i]));
-				
-				Log.d("SERVER REPLY",replyTokens[i] + " ->"+jsonObject.get(replyTokens[i]));
+				for(int i=0;i<replyTokens.length;i++)
+				{
+					
+					reply.put(replyTokens[i], jsonObject.get(replyTokens[i]));
+					
+					Log.d("SERVER REPLY",replyTokens[i] + " ->"+jsonObject.get(replyTokens[i]));
+				}
+			} 
+			catch (JSONException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				reply.put("error", true);
 			}
-		} 
-		catch (JSONException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			reply.put("error", true);
 		}
 		//Log.d("ME", jsonData);
 		

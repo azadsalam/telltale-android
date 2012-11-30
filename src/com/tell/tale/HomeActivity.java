@@ -35,9 +35,9 @@ public class HomeActivity extends Activity implements OnClickListener {
 		switch (id) {
 		case R.id.initiate:
 			intent = new Intent(HomeActivity.this,InitiateActivity.class); 
-			Bundle bundle = new Bundle();
-			bundle.putInt("nid", nid);
-			intent.putExtras(bundle);
+			//Bundle bundle = new Bundle();
+			//bundle.putInt("nid", nid);
+			//intent.putExtras(bundle);
 			startActivity(intent);
 			break;
 
