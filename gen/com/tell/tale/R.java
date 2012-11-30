@@ -17,12 +17,16 @@ public final class R {
         public static final int button2=0x7f050001;
         public static final int button3=0x7f050002;
         public static final int button4=0x7f050003;
-        public static final int editText1=0x7f050005;
-        public static final int editText2=0x7f050007;
+        public static final int editText_id_initial=0x7f050007;
+        public static final int editText_id_mail=0x7f050009;
+        public static final int editText_id_password=0x7f05000b;
         public static final int initiate=0x7f050000;
-        public static final int login=0x7f050008;
+        public static final int linearLayout1=0x7f050006;
+        public static final int login=0x7f05000c;
+        public static final int scrollView1=0x7f050005;
+        public static final int submit_initiate=0x7f050008;
         public static final int textView1=0x7f050004;
-        public static final int textView2=0x7f050006;
+        public static final int textView2=0x7f05000a;
     }
     public static final class layout {
         public static final int home=0x7f030000;
@@ -37,7 +41,9 @@ public final class R {
         public static final int btn_text_onging_list=0x7f040004;
         public static final int btn_text_profile=0x7f040003;
         public static final int btn_text_reg=0x7f040002;
+        public static final int btn_text_submit=0x7f04000b;
         public static final int hello=0x7f040000;
+        public static final int tv_text_initiate_=0x7f04000a;
         public static final int tv_text_password=0x7f040009;
         public static final int tv_text_username=0x7f040008;
     }

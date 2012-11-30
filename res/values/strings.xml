@@ -11,5 +11,7 @@
     <string name="btn_text_login">Log In !</string>
     <string name="tv_text_username">Mail ID</string>
     <string name="tv_text_password">Password</string>
+    <string name="tv_text_initiate_"/>
+    <string name="btn_text_submit">Submit !!</string>
 
 </resources>

@@ -9,9 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_text_username" />
-
+
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editText_id_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -23,9 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_text_password" />
-
+
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText_id_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword" />
