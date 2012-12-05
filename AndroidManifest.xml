@@ -21,6 +21,7 @@
         </activity>
         <activity android:name="HomeActivity"></activity>
         <activity android:name="InitiateActivity"></activity>
+        <activity android:name="OnGoingFeed"></activity>
     </application>
 
 </manifest>

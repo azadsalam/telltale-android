@@ -49,7 +49,7 @@ public class InitiateActivity extends Activity implements OnClickListener,WebSer
 			data.put("nid",Session.nid);
 	    	data.put("text",text);
 	    	//reply tokens
-	        wsu = new WebServiceAdapter(this,this,"Authenticating!!","http://10.0.2.2/telltale/index.php/initiate/androidQuery",data,null);
+	        wsu = new WebServiceAdapter(this,this,"Posting your story!!","http://10.0.2.2/telltale/index.php/initiate/androidQuery",data,null);
 			wsu.startWebService();
 			
 			
@@ -61,7 +61,7 @@ public class InitiateActivity extends Activity implements OnClickListener,WebSer
 	public void processResult(HashMap<String, Object> data) 
 	{
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "Story Initiated\n: "+text,	Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Story Posted\n: "+text,	Toast.LENGTH_LONG).show();
 	}
 
 }

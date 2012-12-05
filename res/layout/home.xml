@@ -9,14 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_initiate_story" />
-
+
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_id_see_ongoing_stories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_onging_list" />
-
-
 
     <Button
         android:id="@+id/button3"

@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
-	Button initiate;
+	Button initiate,ongoing_feed;
 	int nid=1;
 	
 	/** Called when the activity is first created. */
@@ -21,9 +21,10 @@ public class HomeActivity extends Activity implements OnClickListener {
         
         
         initiate = (Button) findViewById(R.id.initiate);
-        
+        ongoing_feed = (Button) findViewById(R.id.btn_id_see_ongoing_stories);
         
         initiate.setOnClickListener(this);
+        ongoing_feed.setOnClickListener(this);
         
     }
 	public void onClick(View v)
@@ -41,6 +42,10 @@ public class HomeActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 
+		case R.id.btn_id_see_ongoing_stories:
+			intent = new Intent(HomeActivity.this,OnGoingFeed.class);
+			startActivity(intent);
+			break;
 		default:
 			break;
 		}
