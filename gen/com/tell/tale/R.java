@@ -29,12 +29,16 @@ public final class R {
         public static final int submit_initiate=0x7f050008;
         public static final int textView1=0x7f050004;
         public static final int textView2=0x7f05000a;
+        public static final int tv_id_likeCount=0x7f050010;
+        public static final int tv_id_text=0x7f050011;
+        public static final int tv_id_username=0x7f05000f;
     }
     public static final class layout {
         public static final int home=0x7f030000;
         public static final int initiate=0x7f030001;
         public static final int main=0x7f030002;
         public static final int ongoing_feed=0x7f030003;
+        public static final int ongoing_feed_row=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
@@ -46,8 +50,11 @@ public final class R {
         public static final int btn_text_reg=0x7f040002;
         public static final int btn_text_submit=0x7f04000b;
         public static final int hello=0x7f040000;
+        public static final int likeCount=0x7f04000c;
+        public static final int text=0x7f04000e;
         public static final int tv_text_initiate_=0x7f04000a;
         public static final int tv_text_password=0x7f040009;
         public static final int tv_text_username=0x7f040008;
+        public static final int username=0x7f04000d;
     }
 }

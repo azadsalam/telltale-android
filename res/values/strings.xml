@@ -13,5 +13,8 @@
     <string name="tv_text_password">Password</string>
     <string name="tv_text_initiate_"/>
     <string name="btn_text_submit">Submit !!</string>
+    <string name="likeCount">likeCount</string>
+    <string name="username">username</string>
+    <string name="text">text</string>
 
 </resources>

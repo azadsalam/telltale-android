@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <ListView
-        android:id="@+id/listView_id_ongoing_feed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
 
-    </ListView>
+
+
+            <ListView
+                android:id="@+id/listView_id_ongoing_feed"
+                android:layout_width="match_parent"
+                android:layout_height="486dp" >
+
+            </ListView>
 
 </LinearLayout>
