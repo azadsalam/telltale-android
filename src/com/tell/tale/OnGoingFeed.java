@@ -1,8 +1,14 @@
 package com.tell.tale;
 
+import java.util.HashMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +19,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class OnGoingFeed extends Activity implements OnItemClickListener
+public class OnGoingFeed extends Activity implements OnItemClickListener,WebServiceUser
 {
+	String replyTokens[] ;
+	HashMap<String, Object> data ;    				
+	
+	int start = 0;
+	int count = 5;
+	
 	ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -23,23 +35,15 @@ public class OnGoingFeed extends Activity implements OnItemClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ongoing_feed);
 		
+		
+		data = new HashMap<String, Object>();    				
+	       
 		//lv = (ListView) findViewById(R.id.listView_id_ongoing_feed);
 		
 		listView = (ListView) findViewById(R.id.listView_id_ongoing_feed);
 		
 		
 		getData();
-    	DataAdapter adapter = new DataAdapter(this, dataArray);		
-		// First paramenter - Context
-		// Second parameter - Layout for the row
-		// Third parameter - ID of the TextView to which the data is written
-		// Forth - the Array of data
-		//Context, Layout for row, ID of TextView, Data Array
-
-		// Assign adapter to ListView
-		listView.setAdapter(adapter); 
-		// pass the context(this) and the dataArray to fillup your listView (dataArray)
-		listView.setOnItemClickListener(this); 
 	}
 	
     // this class is for your data , customize it , as you want
@@ -64,18 +68,25 @@ public class OnGoingFeed extends Activity implements OnItemClickListener
     public void getData()
     {
     	
-    	dataArray = new Data[3];
+
+    	WebServiceAdapter wsu;
+		data.put("start",new String(""+start));
+    	data.put("count",new String(""+count));
     	
-		for(int i=0;i<3;i++)
-		{
-    		dataArray[i]=new Data();
-    		dataArray[i].id=i;
-    		dataArray[i].username = new String("user "+i);
-    		dataArray[i].likeCount=i;
-    		dataArray[i].pid=i;
-    		dataArray[i].nid=i;
-    		dataArray[i].text=new String("Story : "+i);
-       	}
+    	replyTokens = new String[count];
+    	
+    	for (int i=0;i < count;i++)
+    	{
+    		replyTokens[i] = new String("R"+(i+start));
+    	}
+    	
+    	//reply tokens
+    	
+        wsu = new WebServiceAdapter(this,this,"Authenticating!!","http://10.0.2.2/telltale/index.php/ongoingStory_feed/androidQuery",data,replyTokens);
+		wsu.startWebService();
+		
+		
+    	
     }
 
 	
@@ -99,15 +110,16 @@ public class OnGoingFeed extends Activity implements OnItemClickListener
 		    
 		    View rowView = inflater.inflate(R.layout.ongoing_feed_row, parent, false);
 		    
-		    TextView username = (TextView) rowView.findViewById(R.id.tv_id_text);
-		    username.setText(data[position].username);
-		    
 		    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
 		    text.setText(data[position].text);
 		    
 		    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
 		    likeCount.setText(""+data[position].likeCount);
 		    
+
+		    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
+		    username.setText(data[position].username);
+//		    Log.d("UN",data[position].username);
 		    
 		    return rowView;
 		 }
@@ -120,5 +132,62 @@ public class OnGoingFeed extends Activity implements OnItemClickListener
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{
 		    Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
+	}
+
+
+	public void processResult(HashMap<String, Object> data) 
+	{
+		// TODO Auto-generated method stub
+		
+		//Toast.makeText(getApplicationContext(), (CharSequence) data, Toast.LENGTH_LONG).show();
+		
+		
+		// [pid] => 9 [nid] => 1 [text] => HELLO [name] => Azad [vote] => 0
+		dataArray = new Data[count];
+		for (int i=0;i<count;i++)
+		{
+			//String index = new String("R"+(i+start));
+			//Log.d("ONGOING ROW: ",replyTokens[i]+"->");			
+			String row = (data.get(replyTokens[i])).toString();
+			//Log.d("ONGOING ROW: ",replyTokens[i]+"->"+row);
+			
+			try 
+			{
+				JSONObject json = new JSONObject(row);
+				
+				dataArray[i] = new Data();
+				dataArray[i].id = (i+start);
+				dataArray[i].username = json.getString("name");
+				dataArray[i].text = json.getString("text");
+				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
+				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
+				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
+				
+				
+			
+			} 
+			catch (JSONException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+
+    	
+		
+    	DataAdapter adapter = new DataAdapter(this, dataArray);		
+		// First paramenter - Context
+		// Second parameter - Layout for the row
+		// Third parameter - ID of the TextView to which the data is written
+		// Forth - the Array of data
+		//Context, Layout for row, ID of TextView, Data Array
+
+		// Assign adapter to ListView
+		listView.setAdapter(adapter); 
+		// pass the context(this) and the dataArray to fillup your listView (dataArray)
+		listView.setOnItemClickListener(this); 
+
 	}	
 }

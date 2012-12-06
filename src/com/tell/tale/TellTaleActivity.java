@@ -45,13 +45,20 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 		case R.id.login:
 			//Toast.makeText(getApplicationContext(), "Logging In...", Toast.LENGTH_SHORT).show();
 			
+			
+			intent = new Intent(this,HomeActivity.class);
+			startActivity(intent);
+			
+			/* FOR NOW DISABLE LOG IN
 			WebServiceAdapter wsu;
 			data.put("mail",mail.getText().toString());
 	    	data.put("password",password.getText().toString());
+	    	
 	    	//reply tokens
 	    	
 	        wsu = new WebServiceAdapter(this,this,"Authenticating!!","http://10.0.2.2/telltale/index.php/userAuthentication/androidQuery",data,replyTokens);
 			wsu.startWebService();
+			*/
 			break;
 
 		default:
