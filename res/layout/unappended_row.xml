@@ -8,20 +8,26 @@
         android:id="@+id/tv_id_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/username" />
+        android:text="@string/username" 
+        android:gravity="right"
+
+        />
 
     <TextView
         android:id="@+id/tv_id_likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/likeCount"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:gravity="right"
+        />
 
     <TextView
         android:id="@+id/tv_id_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+       
+        android:gravity="right"/>
 
 </LinearLayout>

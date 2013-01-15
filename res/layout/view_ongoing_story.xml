@@ -3,6 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <ListView
+        android:id="@+id/lv_appended_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+         >
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/lv_unappended_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        
+        >
+
+    </ListView>
+    
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_text_contribute_post" />
 
 </LinearLayout>

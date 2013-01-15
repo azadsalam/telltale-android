@@ -26,7 +26,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 	HashMap<String, Object> data ;    				
 	
 	int start = 0;
-	int count = 15;
+	int count = 6;
 	
 	ListView listView;
 	@Override

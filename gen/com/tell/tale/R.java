@@ -14,36 +14,42 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btn_id_see_ongoing_stories=0x7f050001;
-        public static final int button2=0x7f05000d;
-        public static final int button3=0x7f050002;
-        public static final int button4=0x7f050003;
-        public static final int editText_id_initial=0x7f050007;
-        public static final int editText_id_mail=0x7f050009;
-        public static final int editText_id_password=0x7f05000b;
-        public static final int initiate=0x7f050000;
-        public static final int linearLayout1=0x7f050006;
-        public static final int listView_id_ongoing_feed=0x7f05000e;
-        public static final int login=0x7f05000c;
-        public static final int scrollView1=0x7f050005;
-        public static final int submit_initiate=0x7f050008;
-        public static final int textView1=0x7f050004;
-        public static final int textView2=0x7f05000a;
-        public static final int tv_id_likeCount=0x7f050010;
-        public static final int tv_id_text=0x7f050011;
-        public static final int tv_id_username=0x7f05000f;
+        public static final int btn_id_see_ongoing_stories=0x7f050004;
+        public static final int button1=0x7f050014;
+        public static final int button2=0x7f050010;
+        public static final int button3=0x7f050005;
+        public static final int button4=0x7f050006;
+        public static final int editText_id_initial=0x7f05000a;
+        public static final int editText_id_mail=0x7f05000c;
+        public static final int editText_id_password=0x7f05000e;
+        public static final int initiate=0x7f050003;
+        public static final int linearLayout1=0x7f050009;
+        public static final int listView_id_ongoing_feed=0x7f050011;
+        public static final int login=0x7f05000f;
+        public static final int lv_appended_posts=0x7f050012;
+        public static final int lv_unappended_posts=0x7f050013;
+        public static final int scrollView1=0x7f050008;
+        public static final int submit_initiate=0x7f05000b;
+        public static final int textView1=0x7f050007;
+        public static final int textView2=0x7f05000d;
+        public static final int tv_id_likeCount=0x7f050001;
+        public static final int tv_id_text=0x7f050002;
+        public static final int tv_id_username=0x7f050000;
     }
     public static final class layout {
-        public static final int home=0x7f030000;
-        public static final int initiate=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int ongoing_feed=0x7f030003;
-        public static final int ongoing_feed_row=0x7f030004;
-        public static final int view_ongoing_story=0x7f030005;
+        public static final int appended_row=0x7f030000;
+        public static final int home=0x7f030001;
+        public static final int initiate=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int ongoing_feed=0x7f030004;
+        public static final int ongoing_feed_row=0x7f030005;
+        public static final int unappended_row=0x7f030006;
+        public static final int view_ongoing_story=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
         public static final int btn_text_complete_story_list=0x7f040005;
+        public static final int btn_text_contribute_post=0x7f04000e;
         public static final int btn_text_initiate_story=0x7f040006;
         public static final int btn_text_login=0x7f040007;
         public static final int btn_text_onging_list=0x7f040004;
@@ -52,7 +58,7 @@ public final class R {
         public static final int btn_text_submit=0x7f04000b;
         public static final int hello=0x7f040000;
         public static final int likeCount=0x7f04000c;
-        public static final int text=0x7f04000e;
+        public static final int text=0x7f04000f;
         public static final int tv_text_initiate_=0x7f04000a;
         public static final int tv_text_password=0x7f040009;
         public static final int tv_text_username=0x7f040008;
