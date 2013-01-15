@@ -22,6 +22,7 @@
         <activity android:name="HomeActivity"></activity>
         <activity android:name="InitiateActivity"></activity>
         <activity android:name="OnGoingFeed"></activity>
+        <activity android:name="ViewOnGoingStory"></activity>
     </application>
 
 </manifest>

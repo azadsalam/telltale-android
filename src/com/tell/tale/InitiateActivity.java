@@ -14,7 +14,7 @@ public class InitiateActivity extends Activity implements OnClickListener,WebSer
 {
 
 	Button submit_btn;
-	int nid;
+	int nid=1;
 	String text;
 	HashMap<String, Object> data ;  
    

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 	HashMap<String, Object> data ;    				
 	
 	int start = 0;
-	int count = 5;
+	int count = 15;
 	
 	ListView listView;
 	@Override
@@ -82,7 +83,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Authenticating!!","http://10.0.2.2/telltale/index.php/ongoingStory_feed/androidQuery",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","http://10.0.2.2/telltale/index.php/ongoingStory_feed/androidQuery",data,replyTokens);
 		wsu.startWebService();
 		
 		
@@ -130,8 +131,14 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 
 
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
-	{
-		    Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
+	{ 
+		Data data = dataArray[position];
+		Intent intent = new Intent(this,ViewOnGoingStory.class);
+		Bundle xtra = new Bundle();
+		xtra.putInt("pid", data.pid);
+		intent.putExtras(xtra);
+		startActivity(intent);
+		   // Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
 	}
 
 
@@ -147,10 +154,13 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		for (int i=0;i<count;i++)
 		{
 			//String index = new String("R"+(i+start));
-			//Log.d("ONGOING ROW: ",replyTokens[i]+"->");			
-			String row = (data.get(replyTokens[i])).toString();
+			//Log.d("ONGOING ROW: ",replyTokens[i]+"->");		
+			Object ret = (data.get(replyTokens[i]));
+			if(ret==null)continue;
+			String row =ret.toString();
 			//Log.d("ONGOING ROW: ",replyTokens[i]+"->"+row);
 			
+			if(row==null || row.equals(""))continue;
 			try 
 			{
 				JSONObject json = new JSONObject(row);
@@ -166,7 +176,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 				
 			
 			} 
-			catch (JSONException e) 
+			catch (Exception e) 
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
