@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class contributeActivity extends Activity implements OnClickListener, WebServiceUser
+public class ContributeActivity extends Activity implements OnClickListener, WebServiceUser
 {
  
 	int nid;

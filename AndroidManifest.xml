@@ -23,8 +23,10 @@
         <activity android:name="InitiateActivity"></activity>
         <activity android:name="OnGoingFeed"></activity>
         <activity android:name="ViewOnGoingStory"></activity>
-        <activity android:name="contributeActivity"></activity>
+        <activity android:name=".ContributeActivity"></activity>
         <activity android:name="CompleteStoriesFeed"></activity>
+        <activity android:name=".MyOngoingFeedActivity"></activity>
+        <activity android:name="AppendSuggestionActivity"></activity>
     </application>
 
 </manifest>

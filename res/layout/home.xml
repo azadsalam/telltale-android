@@ -27,5 +27,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_profile" />
+
+    <Button
+        android:id="@+id/btn_my_initiated_stories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_my_stories" />
+
+    <Button
+        android:id="@+id/btn_my_initiated_ongoing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_my_initiated_stories" />
 
 </LinearLayout>

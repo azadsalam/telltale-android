@@ -9,6 +9,6 @@ public class Data
 	int likeCount;
 	String text;
 	String username;
-	Boolean isEnd;
+	Boolean isSuggestedEnd = false;
 	
 }

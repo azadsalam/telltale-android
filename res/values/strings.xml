@@ -19,5 +19,8 @@
     <string name="text"/>
     <string name="cb_suggest_end">Should this be the end of this story ??</string>
     <string name="btn_text_submit_contribution">Submit Contribution</string>
+    <string name="btn_my_initiated_stories">My Initiated  Ongoing Stories</string>
+    <string name="btn_my_stories">My Initiated Stories</string>
+    <string name="btn_see_more">See More</string>
 
 </resources>

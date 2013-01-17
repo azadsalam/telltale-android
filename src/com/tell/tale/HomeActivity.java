@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class HomeActivity extends Activity implements OnClickListener {
 
-	Button initiate,ongoing_feed,btn_completed_stories;
+	Button initiate,ongoing_feed,btn_completed_stories,btn_my_ongoing;
 	int nid=1;
 	
 	/** Called when the activity is first created. */
@@ -23,10 +23,13 @@ public class HomeActivity extends Activity implements OnClickListener {
         initiate = (Button) findViewById(R.id.initiate);
         ongoing_feed = (Button) findViewById(R.id.btn_id_see_ongoing_stories);
         btn_completed_stories = (Button) findViewById(R.id.btn_completed_story_feed);
+        btn_my_ongoing = (Button) findViewById(R.id.btn_my_initiated_ongoing);
+        
         
         initiate.setOnClickListener(this);
         ongoing_feed.setOnClickListener(this);
         btn_completed_stories.setOnClickListener(this);
+        btn_my_ongoing.setOnClickListener(this);
     }
 	public void onClick(View v)
 	{
@@ -50,6 +53,11 @@ public class HomeActivity extends Activity implements OnClickListener {
 			
 		case R.id.btn_completed_story_feed:
 			intent = new Intent(HomeActivity.this,CompleteStoriesFeed.class);
+			startActivity(intent);
+			break;
+			
+		case R.id.btn_my_initiated_ongoing:
+			intent = new Intent(HomeActivity.this, MyOngoingFeedActivity.class);
 			startActivity(intent);
 			break;
 		default:

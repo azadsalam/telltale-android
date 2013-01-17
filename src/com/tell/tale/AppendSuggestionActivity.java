@@ -4,26 +4,25 @@ import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.tell.tale.OnGoingFeed.Data;
-import com.tell.tale.OnGoingFeed.DataAdapter;
-
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClickListener
+public class AppendSuggestionActivity extends Activity implements OnItemClickListener,WebServiceUser, OnClickListener 
 {
 	// FOR FETCHING DATA FROM SERVER
 	private WebServiceAdapter wsu;
@@ -45,64 +44,31 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 	TextView tv_test;
 	
 	//Last appended
-	int lastAppendedPostId; 	
 	int pid;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.view_ongoing_story);
+		setContentView(R.layout.append_suggestion);
 		
 		Bundle bundle = getIntent().getExtras();
 		pid = bundle.getInt("pid");
-		//Log.d("PID : ",""+pid);
-		
-		
-		btn_contribute = (Button) findViewById(R.id.btn_contribute);
-		btn_contribute.setOnClickListener(this);
 		
 		// FOR VIEWING APPENDED POSTS
-        appended_listview = (ListView) findViewById(R.id.lv_appended_posts); 
-        Unappended_listview = (ListView)findViewById(R.id.lv_unappended_posts);
-
+        appended_listview = (ListView) findViewById(R.id.lv_append_suggestion_appended); 
+        Unappended_listview = (ListView)findViewById(R.id.lv_append_suggestion_unappended);
+        Unappended_listview.setOnItemClickListener(this);
 
 		//FETCH STORY FROM SERVER
         prepareData();
 		wsu = new WebServiceAdapter(this,this,"Loading Story!!","http://10.0.2.2/telltale/index.php/ongoingstory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
- 		
-	}
-    
-	public void onClick(View v) 
-	{
-		// TODO Auto-generated method stub
-		Intent intent = new Intent(this,ContributeActivity.class);
-		
-		Bundle bundle = new Bundle();
-		bundle.putInt("lastAppendedPostId", lastAppendedPostId);
-		intent.putExtras(bundle);
-		startActivity(intent);
 	}
 	
-    // this class is for your data , customize it , as you want
-    class Data
-    {
-
-    	int id;
-    	
-    	int pid;
-    	int nid;
-    	int likeCount;
-    	String text;
-    	String username;
-    	//( post er pid, text, nid and like count , nid er name)
-    	
-    }
-
-
-    class DataAdapter extends ArrayAdapter<Data> 
+	class DataAdapter extends ArrayAdapter<Data> 
     {
     	final Context context;
     	final Data[] data;
@@ -132,8 +98,21 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 		    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
 		    likeCount.setText(""+data[position].likeCount);
 		    
+
 		    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
 		    username.setText(data[position].username);
+		    
+		    try
+		    {
+		    	TextView isSuggestedEnd = (TextView) rowView.findViewById(R.id.tv_isSuggestedEnd);
+		    	if(data[position].isSuggestedEnd)
+	    		{
+		    		isSuggestedEnd.setText("SUGGESTED END");
+	    		}
+		    }
+		    catch (Exception e) {
+				// TODO: handle exception
+			}
     		
     		return rowView;
     	}
@@ -145,8 +124,6 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
     private void populateDataArray(JSONObject jsonArray, Data dataArray[],int count) 
     {
 
-    	
-    	
 		for (int i=0;i<count;i++)
 		{
 
@@ -156,7 +133,6 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 				if(row==null)continue;
 				Log.d("ONGOING ROW "+i+" : "," -> "+row);
 				
-
 				JSONObject json = new JSONObject(row);
 				
 				dataArray[i] = new Data();
@@ -166,7 +142,9 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
 				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
 				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
+				dataArray[i].isSuggestedEnd = Boolean.parseBoolean(json.getString("isSuggestedEnd"));
 				
+				Log.d("isSuggestedEnd " +i,json.getString("isSuggestedEnd") );
 			
 			} 
 			catch (Exception e) 
@@ -221,17 +199,14 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 		
 		if(appendedPosts != null)
 		{
-		
 	    	DataAdapter appended_adapter = new DataAdapter(this, appendedPosts,R.layout.appended_row);		
 			appended_listview.setAdapter(appended_adapter); 
-			lastAppendedPostId = appendedPosts[appended_post_count-1].pid;
-			Log.d("viewongoing ACTIVITY : "," lastappendedpostid "+lastAppendedPostId);
 		}		
 	    	
     	if(unappendedPosts != null)
     	{
     		DataAdapter unappended_adapter = new DataAdapter(this, unappendedPosts,R.layout.unappended_row);		
-    		Unappended_listview.setAdapter(unappended_adapter); 
+    			Unappended_listview.setAdapter(unappended_adapter); 
     	}
 				
  	    
@@ -257,10 +232,50 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
     { 
     	wsu.startWebService();
     }
-	
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+	{
+		// TODO Auto-generated method stub
+		
+		//Toast.makeText(getApplicationContext(), "HUmm", Toast.LENGTH_LONG).show();
+		initiatePopupWindow();
+	}
     
+	
+	private PopupWindow pw;
+	private Button btn_close_popup;
+	private void initiatePopupWindow() 
+	{
+		try 
+		{
+			LayoutInflater inflater = (LayoutInflater) AppendSuggestionActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View layout = inflater.inflate(R.layout.append_confirm_popup,(ViewGroup) findViewById(R.id.layout_append_confirmation_popup));
+			pw = new PopupWindow(layout,250, 200, true);
+			pw.showAtLocation(layout, Gravity.CENTER_VERTICAL, 0, 0);
+			
+			btn_close_popup = (Button) layout.findViewById(R.id.btn_append_close_popup);
+			btn_close_popup.setOnClickListener(this);
+			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		pw.dismiss();
+	}
+	
+	/* 
+	private OnClickListener cancel_button_click_listener = new OnClickListener() {
+	    public void onClick(View v) {
+	        pw.dismiss();
+	    }
+	};
+	*/
 	/* ---------FOR FETCHING DATA FROM SERVER ENDS------*/ 
 
 
 
+	
 }
