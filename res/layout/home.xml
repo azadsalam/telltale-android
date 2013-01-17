@@ -15,14 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_onging_list" />
-
+
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_completed_story_feed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_complete_story_list" />
-
-
 
     <Button
         android:id="@+id/button4"

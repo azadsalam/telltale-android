@@ -3,6 +3,7 @@ package com.tell.tale;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,9 +45,12 @@ public class InitiateActivity extends Activity implements OnClickListener,WebSer
 			
 			text = et.getText().toString();
 			
+			SharedPreferences myPrefs = this.getSharedPreferences("telltaleprefs", MODE_WORLD_READABLE);
+			int nid = myPrefs.getInt("nid", 0);
+	        
 			WebServiceAdapter wsu;
 			data = new HashMap<String, Object>();
-			data.put("nid",Session.nid);
+			data.put("nid",nid);
 	    	data.put("text",text);
 	    	//reply tokens
 	        wsu = new WebServiceAdapter(this,this,"Posting your story!!","http://10.0.2.2/telltale/index.php/initiate/androidQuery",data,null);

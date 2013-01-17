@@ -3,6 +3,7 @@ package com.tell.tale;
 import java.util.HashMap;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +16,8 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 	Button login;
 	EditText mail,password;
 	HashMap<String, Object> data ;    				
-	
+
+	int nid=1;
 	String replyTokens[] = {"nid"};
     /** Called when the activity is first created. */
     @Override
@@ -23,6 +25,14 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        
+        //OMIT THIS WHEN IN PRODUCTION
+		SharedPreferences myPrefs = this.getSharedPreferences("telltaleprefs", MODE_WORLD_READABLE);
+        SharedPreferences.Editor prefsEditor = myPrefs.edit();
+        prefsEditor.putInt("nid",1);
+        prefsEditor.commit();
+        ///////////////////////////////
         
         data = new HashMap<String, Object>();    				
         login = (Button) findViewById(R.id.login);
@@ -80,7 +90,13 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 		
 		else
 		{
-			Session.nid = (new Integer((String)nid)).intValue();
+			//Session.nid = (new Integer((String)nid)).intValue();
+			
+			SharedPreferences myPrefs = this.getSharedPreferences("telltaleprefs", MODE_WORLD_READABLE);
+	        SharedPreferences.Editor prefsEditor = myPrefs.edit();
+	        prefsEditor.putInt("nid", (new Integer((String)nid)).intValue());
+	        prefsEditor.commit();
+
 			Toast.makeText(this, "Authectication Successful\nnid : "+nid, Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(this,HomeActivity.class);
 			startActivity(intent);

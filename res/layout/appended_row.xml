@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/likeCount"
         android:textAppearance="?android:attr/textAppearanceSmall" 
-        android:gravity="right"
+        
         />
 
     <TextView
@@ -28,6 +28,6 @@
         android:layout_height="wrap_content"
         android:text="@string/text"
         android:textAppearance="?android:attr/textAppearanceLarge" 
-        android:gravity="right"/>
+        />
 
 </LinearLayout>

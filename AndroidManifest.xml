@@ -23,6 +23,8 @@
         <activity android:name="InitiateActivity"></activity>
         <activity android:name="OnGoingFeed"></activity>
         <activity android:name="ViewOnGoingStory"></activity>
+        <activity android:name="contributeActivity"></activity>
+        <activity android:name="CompleteStoriesFeed"></activity>
     </application>
 
 </manifest>

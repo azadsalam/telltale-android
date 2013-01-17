@@ -17,5 +17,7 @@
     <string name="username">username</string>
     <string name="btn_text_contribute_post">Propose Extension</string>
     <string name="text"/>
+    <string name="cb_suggest_end">Should this be the end of this story ??</string>
+    <string name="btn_text_submit_contribution">Submit Contribution</string>
 
 </resources>

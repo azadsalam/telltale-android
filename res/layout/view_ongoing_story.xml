@@ -17,13 +17,12 @@
         android:id="@+id/lv_unappended_posts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        
         >
 
     </ListView>
     
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btn_contribute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_contribute_post" />

@@ -10,6 +10,7 @@ import com.tell.tale.OnGoingFeed.DataAdapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ViewOnGoingStory extends Activity implements WebServiceUser
+public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClickListener
 {
 	// FOR FETCHING DATA FROM SERVER
 	private WebServiceAdapter wsu;
@@ -39,7 +40,13 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser
 	int unappended_part_count;
 	
 	
+	
+	Button btn_contribute;
 	TextView tv_test;
+	
+	//Last appended
+	int lastAppendedPostId; 
+	
 	int pid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -53,6 +60,9 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser
 		Log.d("PID : ",""+pid);
 		
 		
+		btn_contribute = (Button) findViewById(R.id.btn_contribute);
+		btn_contribute.setOnClickListener(this);
+		
 		// FOR VIEWING APPENDED POSTS
         appended_listview = (ListView) findViewById(R.id.lv_appended_posts); 
         Unappended_listview = (ListView)findViewById(R.id.lv_unappended_posts);
@@ -63,11 +73,20 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser
 		wsu = new WebServiceAdapter(this,this,"Loading Story!!","http://10.0.2.2/telltale/index.php/ongoingstory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
-        
-        
-		
+ 		
 	}
     
+	public void onClick(View v) 
+	{
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(this,contributeActivity.class);
+		
+		Bundle bundle = new Bundle();
+		bundle.putInt("lastAppendedPostId", lastAppendedPostId);
+		intent.putExtras(bundle);
+		startActivity(intent);
+	}
+	
     // this class is for your data , customize it , as you want
     class Data
     {
@@ -207,13 +226,15 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser
 		
 	    	DataAdapter appended_adapter = new DataAdapter(this, appendedPosts,R.layout.appended_row);		
 			appended_listview.setAdapter(appended_adapter); 
+			lastAppendedPostId = appendedPosts[appended_post_count-1].pid;
+			Log.d("viewongoing ACTIVITY : "," lastappendedpostid "+lastAppendedPostId);
 		}		
 	    	
-	    	if(unappendedPosts != null)
-	    	{
-	    		DataAdapter unappended_adapter = new DataAdapter(this, unappendedPosts,R.layout.unappended_row);		
-	    			Unappended_listview.setAdapter(unappended_adapter); 
-	    	}
+    	if(unappendedPosts != null)
+    	{
+    		DataAdapter unappended_adapter = new DataAdapter(this, unappendedPosts,R.layout.unappended_row);		
+    			Unappended_listview.setAdapter(unappended_adapter); 
+    	}
 				
  	    
 	}
@@ -238,6 +259,7 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser
     { 
     	wsu.startWebService();
     }
+	
     
 	/* ---------FOR FETCHING DATA FROM SERVER ENDS------*/ 
 
