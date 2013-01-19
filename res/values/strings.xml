@@ -22,5 +22,11 @@
     <string name="btn_my_initiated_stories">My Initiated  Ongoing Stories</string>
     <string name="btn_my_stories">My Initiated Stories</string>
     <string name="btn_see_more">See More</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_approve_apppend_suggestion">Append This Suggestion To My Story</string>
+    <color name="R">#FF5577</color>
+    <string name="tv_approve_append_suggestion_sure">Are you sure you want to append this suggestion to your story ???</string>
+    <color name="Red">#12EF53</color>
+    <string name="tv_approve_append_suggestion_isEnd">This suggestion was marked end. Adding this will complete your story </string>
 
 </resources>

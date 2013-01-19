@@ -4,14 +4,18 @@ import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,7 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AppendSuggestionActivity extends Activity implements OnItemClickListener,WebServiceUser, OnClickListener 
+public class AppendSuggestionActivity extends Activity implements OnItemClickListener,WebServiceUser,OnClickListener 
 {
 	// FOR FETCHING DATA FROM SERVER
 	private WebServiceAdapter wsu;
@@ -39,6 +43,8 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 	int unappended_part_count;
 	
 	
+	PopupWindow popupWindow;
+	int appendedPid;
 	
 	Button btn_contribute;
 	TextView tv_test;
@@ -101,13 +107,15 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 
 		    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
 		    username.setText(data[position].username);
-		    
+
+	    	TextView isSuggestedEnd = (TextView) rowView.findViewById(R.id.tv_isSuggestedEnd);
 		    try
 		    {
-		    	TextView isSuggestedEnd = (TextView) rowView.findViewById(R.id.tv_isSuggestedEnd);
+
 		    	if(data[position].isSuggestedEnd)
 	    		{
 		    		isSuggestedEnd.setText("SUGGESTED END");
+		    		
 	    		}
 		    }
 		    catch (Exception e) {
@@ -142,7 +150,8 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
 				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
 				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
-				dataArray[i].isSuggestedEnd = Boolean.parseBoolean(json.getString("isSuggestedEnd"));
+				dataArray[i].isSuggestedEnd = (json.getString("isSuggestedEnd").equals("1"))?true:false;
+				Log.d("TRACK END of row "+i,json.getString("isSuggestedEnd"));
 				
 				Log.d("isSuggestedEnd " +i,json.getString("isSuggestedEnd") );
 			
@@ -232,48 +241,100 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
     { 
     	wsu.startWebService();
     }
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+	/* ---------FOR FETCHING DATA FROM SERVER ENDS------*/ 
+
+	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{
 		// TODO Auto-generated method stub
 		
 		//Toast.makeText(getApplicationContext(), "HUmm", Toast.LENGTH_LONG).show();
-		initiatePopupWindow();
+		
+		appendedPid = unappendedPosts[position].pid;
+		showPopUp(R.layout.append_confirm_popup, R.id.btn_append_close_popup,position);
+		
 	}
-    
 	
-	private PopupWindow pw;
-	private Button btn_close_popup;
-	private void initiatePopupWindow() 
+	
+	public void showPopUp(int popupLayout,int dismissButtonId,int position) 
 	{
-		try 
-		{
-			LayoutInflater inflater = (LayoutInflater) AppendSuggestionActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View layout = inflater.inflate(R.layout.append_confirm_popup,(ViewGroup) findViewById(R.id.layout_append_confirmation_popup));
-			pw = new PopupWindow(layout,250, 200, true);
-			pw.showAtLocation(layout, Gravity.CENTER_VERTICAL, 0, 0);
-			
-			btn_close_popup = (Button) layout.findViewById(R.id.btn_append_close_popup);
-			btn_close_popup.setOnClickListener(this);
-			
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		LayoutInflater layoutInflater = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);  
+			    
+		View popupView = layoutInflater.inflate(popupLayout, null);  
+	    popupWindow = new PopupWindow(popupView,LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);  
+			             
+	    
+	    /*INITIALISE*/
+	    
+	    TextView tv_post = (TextView) popupView.findViewById(R.id.tv_append_confirm_post);
+	    tv_post.setText(unappendedPosts[position].text);
+	    
+	    
+	    Button btn_approve_append_suggestion  = (Button) popupView.findViewById(R.id.btn_approve_append_suggestion);
+	    btn_approve_append_suggestion.setOnClickListener(this);
+	    
+	    if(unappendedPosts[position].isSuggestedEnd == false)
+	    {
+	    	TextView tv_isSuggestedEnd = (TextView) popupView.findViewById(R.id.tv_append_confirm_isSuggestedEnd);
+	    	tv_isSuggestedEnd.setText("");
+	    }
+	    
+	    Button btnDismiss = (Button)popupView.findViewById(dismissButtonId);
+	    btnDismiss.setOnClickListener(new Button.OnClickListener(){
+
+			     public void onClick(View v) {
+			      // TODO Auto-generated method stub
+			      popupWindow.dismiss();
+			     }});
+			               
+	   // popupWindow.showAsDropDown(btnOpenPopup, 50, -30);
+	    popupWindow.showAtLocation(popupView.getRootView(),Gravity.CENTER, 0, 0);
+
 	}
-	public void onClick(View v) {
+	public void onClick(View v) 
+	{
 		// TODO Auto-generated method stub
-		pw.dismiss();
+		
+		//popupWindow.dismiss();
+		new DemoWebServiceUser(this);
+		
+		Intent intent = new Intent(this,AppendSuggestionActivity.class);
+		Bundle xtra = new Bundle();
+		xtra.putInt("pid", pid);
+		intent.putExtras(xtra);
+		startActivity(intent);
+
 	}
 	
-	/* 
-	private OnClickListener cancel_button_click_listener = new OnClickListener() {
-	    public void onClick(View v) {
-	        pw.dismiss();
-	    }
-	};
-	*/
-	/* ---------FOR FETCHING DATA FROM SERVER ENDS------*/ 
+
+	
+	class DemoWebServiceUser implements WebServiceUser
+	{
+		private HashMap<String, Object>  data;
+		private HashMap<String, Object>  reply;
+		private String replyTokens[];
+	
+		
+		public DemoWebServiceUser(Context c) 
+		{
+			// TODO Auto-generated constructor stub
+			
+		   	data = new HashMap<String, Object>();    	
+	    	data.put("pid",appendedPid);    	
+			wsu = new WebServiceAdapter(this,c,"Updating your story!!","http://10.0.2.2/telltale/index.php/add_comment/appendFromAndroid",data,replyTokens);        
+	        startWebService();
+
+	    	
+		}
+
+		public void processResult(HashMap<String, Object> data) 
+		{
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+
 
 
 
