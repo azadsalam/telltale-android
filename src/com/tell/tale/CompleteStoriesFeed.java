@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,20 +15,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnItemClickListener
+public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnItemClickListener,OnClickListener
 {
 	String replyTokens[] ;
 	HashMap<String, Object> data ;    				
 	
 	
 	int start = 0;
-	int count = 10;
+	int count = 0;
+	int increment = 2;
 	
 	ListView listView;
 	Data dataArray[];
+	
+	Button btn_see_more ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -36,27 +41,31 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.completed_stories_feed);
 		
+		
+		btn_see_more = (Button) findViewById(R.id.btn_see_more_completed_feed);
+		btn_see_more.setOnClickListener(this);
+		
+		
 		data = new HashMap<String, Object>();    				
-		dataArray = new Data[count];   
 		//lv = (ListView) findViewById(R.id.listView_id_ongoing_feed);
 		
 		listView = (ListView) findViewById(R.id.lv_completed_feed);
 		
 		
-		getData(start,count);
+		getData(start,increment);
 
 	}
-    public void getData(int start,int count)
+    public void getData(int start,int increment)
     {
     	
 
     	WebServiceAdapter wsu;
 		data.put("start",new String(""+start));
-    	data.put("count",new String(""+count));
+    	data.put("count",new String(""+increment));
     	
-    	replyTokens = new String[count];
+    	replyTokens = new String[increment];
     	
-    	for (int i=0;i < count;i++)
+    	for (int i=0;i < increment;i++)
     	{
     		replyTokens[i] = new String(""+(i+start));
     	}
@@ -137,11 +146,22 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		
 		// [pid] => 9 [nid] => 1 [text] => HELLO [name] => Azad [vote] => 0
 		
-		for (int i=0;i<count;i++)
+		Data[] temp = new Data[count+increment];
+		
+		if(dataArray != null)
 		{
+			System.arraycopy(dataArray, 0, temp, 0, count);
+		}
+		
+		int prevCount=count;
+		int i;
+		for (int j=0;j<increment;j++)
+		{
+			
+			i = count;
 			//String index = new String("R"+(i+start));
 			//Log.d("ONGOING ROW: ",replyTokens[i]+"->");		
-			Object ret = (data.get(replyTokens[i]));
+			Object ret = (data.get(replyTokens[j]));
 			if(ret==null)continue;
 			String row =ret.toString();
 			//Log.d("ONGOING ROW: ",replyTokens[i]+"->"+row);
@@ -151,16 +171,16 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 			{
 				JSONObject json = new JSONObject(row);
 				
-				dataArray[i] = new Data();
-				dataArray[i].id = (i+start);
-				dataArray[i].username = json.getString("name");
-				dataArray[i].text = json.getString("text");
-				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
-				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
-				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
+				temp[i] = new Data();
+				temp[i].id = (i);
+				temp[i].username = json.getString("name");
+				temp[i].text = json.getString("text");
+				temp[i].pid = Integer.parseInt(json.getString("pid"));
+				temp[i].nid = Integer.parseInt(json.getString("nid"));
+				temp[i].likeCount = Integer.parseInt(json.getString("vote"));
 				
+				count++;
 				
-			
 			} 
 			catch (Exception e) 
 			{
@@ -171,7 +191,15 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		
 		
 
+		if(count - prevCount != increment)
+		{
+			btn_see_more.setEnabled(false);
+		}
     	
+		
+		
+		dataArray = temp;
+		//Log.d("count", ""+count);
 		
     	DataAdapter adapter = new DataAdapter(this, dataArray);		
 		// First paramenter - Context
@@ -185,5 +213,12 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		// pass the context(this) and the dataArray to fillup your listView (dataArray)
 		listView.setOnItemClickListener(this); 
 
+	}
+	public void onClick(View v) 
+	{
+		// TODO Auto-generated method stub
+		
+		getData(count, increment);
+		
 	}	
 }
