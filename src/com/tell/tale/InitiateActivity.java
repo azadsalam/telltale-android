@@ -54,7 +54,7 @@ public class InitiateActivity extends Activity implements OnClickListener,WebSer
 			data.put("nid",nid);
 	    	data.put("text",text);
 	    	//reply tokens
-	        wsu = new WebServiceAdapter(this,this,"Posting your story!!","http://10.0.2.2/telltale/index.php/initiate/androidQuery",data,null);
+	        wsu = new WebServiceAdapter(this,this,"Posting your story!!","https://telltale-azad.rhcloud.com/index.php/initiate/androidQuery",data,null);
 			wsu.startWebService();
 			
 			

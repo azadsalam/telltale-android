@@ -6,7 +6,8 @@
     android:background="@drawable/back"
     
     >
-
+    <include 
+    layout="@layout/top"/>
     <EditText
         android:id="@+id/et_contribution_txt"
         android:layout_width="match_parent"

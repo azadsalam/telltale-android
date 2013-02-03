@@ -35,5 +35,12 @@
     <color name="text_dark_green">#FE192B0C</color>
     <color name="text_orandge">#FFf0742d</color>
     <color name="text_light_orange">#AAf0742d</color>
+    <string name="btn_back">Back</string>
+    <color name="popup_back">#88EDF0D0</color>
+    <string name="point">Points You Have Earned</string>
+    <string name="comment">No. of story contributions</string>
+    <string name="initiatated">No. of Stories you have initiated</string>
+    <string name="appended">No. of Appended Posts</string>
+    <string name="hey">Hi !! </string>
     
 </resources>

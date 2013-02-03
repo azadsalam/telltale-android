@@ -69,7 +69,7 @@ public class ContributeActivity extends Activity implements OnClickListener, Web
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Adding your Contribution!!","http://10.0.2.2/telltale/index.php/add_comment/addSuggestionFromAndroid",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Adding your Contribution!!","https://telltale-azad.rhcloud.com/index.php/add_comment/addSuggestionFromAndroid",data,replyTokens);
         wsu.startWebService();
 		
 	}

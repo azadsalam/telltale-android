@@ -69,7 +69,7 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 	    	
 	    	//reply tokens
 	    	
-	        wsu = new WebServiceAdapter(this,this,"Authenticating!!","http://10.0.2.2/telltale/index.php/userAuthentication/androidQuery",data,replyTokens);
+	        wsu = new WebServiceAdapter(this,this,"Authenticating!!","https://telltale-azad.rhcloud.com/index.php/userAuthentication/androidQuery",data,replyTokens);
 			wsu.startWebService();
 			*/
 			break;

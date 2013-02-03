@@ -2,33 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
     android:background="@drawable/back"
-   >
-
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_initiate_story"
-        android:textAppearance="?android:attr/textAppearanceLarge" 
-        android:textColor="@color/text_dark_green"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" 
+        android:gravity="center"
+        android:paddingBottom="3dip"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
+            android:layout_height="fill_parent" >
+
             <EditText
                 android:id="@+id/editText_id_initial"
-                android:layout_width="wrap_content"
-                android:layout_height="360dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="314dip"
                 android:inputType="textMultiLine" >
 
                 <requestFocus />
@@ -36,15 +39,13 @@
 
         </LinearLayout>
     </ScrollView>
-
+
     <Button
         android:id="@+id/submit_initiate"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/btn_text_submit" 
-        android:background="@drawable/button_shape" 
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dip"
-        
-        />
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_text_submit" />
 
 </LinearLayout>

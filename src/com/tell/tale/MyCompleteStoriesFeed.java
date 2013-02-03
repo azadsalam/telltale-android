@@ -72,7 +72,7 @@ public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,On
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","http://10.0.2.2/telltale/index.php/personalcompletedStory_feed/getCompletedStoriesFeedFromAndroid",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","https://telltale-azad.rhcloud.com/index.php/personalCompletedStory_feed/getCompletedStoriesFeedFromAndroid",data,replyTokens);
 		wsu.startWebService();
 		
     }
@@ -151,7 +151,7 @@ public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,On
 			//String index = new String("R"+(i+start));
 
 			Object ret = (data.get(replyTokens[i]));
-			Log.d("MY COMPLETE ROW: " + i ,replyTokens[i]+"-> " + ret.toString());		
+			//Log.d("MY COMPLETE ROW: " + i ,replyTokens[i]+"-> " + ret.toString());		
 			if(ret==null)continue;
 			String row =ret.toString();
 			//Log.d("ONGOING ROW: ",replyTokens[i]+"->"+row);

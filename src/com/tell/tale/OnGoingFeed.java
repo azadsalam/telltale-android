@@ -26,7 +26,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 	HashMap<String, Object> data ;    				
 	
 	int start = 0;
-	int count = 6;
+	int count = 5;
 	
 	ListView listView;
 	@Override
@@ -83,7 +83,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","http://10.0.2.2/telltale/index.php/ongoingStory_feed/androidQuery",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","https://telltale-azad.rhcloud.com/index.php/ongoingStory_feed/androidQuery",data,replyTokens);
 		wsu.startWebService();
 		
 		
@@ -111,15 +111,19 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		    
 		    View rowView = inflater.inflate(R.layout.ongoing_feed_row, parent, false);
 		    
-		    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
-		    text.setText(data[position].text);
 		    
-		    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
-		    likeCount.setText(""+data[position].likeCount);
-		    
-
-		    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
-		    username.setText(data[position].username);
+		    if(data[position] != null)
+		    {
+			    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
+			    text.setText(data[position].text);
+			    
+			    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
+			    likeCount.setText(""+data[position].likeCount);
+			    
+	
+			    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
+			    username.setText(data[position].username);
+			}
 //		    Log.d("UN",data[position].username);
 		    
 		    return rowView;
@@ -132,12 +136,15 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
-		Data data = dataArray[position];
-		Intent intent = new Intent(this,ViewOnGoingStory.class);
-		Bundle xtra = new Bundle();
-		xtra.putInt("pid", data.pid);
-		intent.putExtras(xtra);
-		startActivity(intent);
+		if(dataArray[position] != null)
+		{
+			Data data = dataArray[position];
+			Intent intent = new Intent(this,ViewOnGoingStory.class);
+			Bundle xtra = new Bundle();
+			xtra.putInt("pid", data.pid);
+			intent.putExtras(xtra);
+			startActivity(intent);
+		}
 		   // Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
 	}
 

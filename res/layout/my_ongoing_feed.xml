@@ -6,6 +6,9 @@
     android:background="@drawable/back"
     >
 
+    <include 
+    layout="@layout/top"/>
+    
     <ListView
         android:id="@+id/lv_my_ongoing_feed"
         android:layout_width="match_parent"

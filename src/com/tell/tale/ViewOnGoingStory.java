@@ -69,7 +69,7 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 
 		//FETCH STORY FROM SERVER
         prepareData();
-		wsu = new WebServiceAdapter(this,this,"Loading Story!!","http://10.0.2.2/telltale/index.php/ongoingstory_feed/getFullStoryFromAndroid",data,replyTokens);        
+		wsu = new WebServiceAdapter(this,this,"Loading Story!!","https://telltale-azad.rhcloud.com/index.php/ongoingStory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
  		

@@ -2,24 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
     android:background="@drawable/back"
-    >
-
+    android:orientation="vertical" >
+
+        <include 
+        layout="@layout/top"/>
+    
     <ListView
         android:id="@+id/lv_completed_feed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="370dip"
+        android:layout_weight="1" >
 
     </ListView>
-
+
     <Button
         android:id="@+id/btn_see_more_completed_feed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_see_more"
-        android:background="@drawable/button_shape" 
         android:layout_marginBottom="5dip"
-         />
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_see_more" />
 
 </LinearLayout>

@@ -151,7 +151,7 @@ public class WebServiceAsyncTask extends AsyncTask<String, String, String>
 	{
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);	
-		Log.d("ON POST EXECUTE , SERVER RAW REPLY ", result);
+		//Log.d("ON POST EXECUTE , SERVER RAW REPLY ", result);
 		webServiceUser.processReply(result);
 	}
 

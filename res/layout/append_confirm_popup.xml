@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
-        android:background="@android:color/darker_gray"
+        android:background="@color/popup_back"
         android:orientation="vertical" >
 
      >
@@ -21,22 +21,22 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:orientation="vertical" >
-
-
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_approve_append_suggestion_sure"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/Red" />
-
+        android:textColor="@color/text_orandge" />
+
     <TextView
         android:id="@+id/tv_append_confirm_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" />
 
     <TextView
         android:id="@+id/tv_append_confirm_isSuggestedEnd"

@@ -30,6 +30,7 @@
         <activity android:name="ViewFullStory"></activity>
         <activity android:name="RegistrationActivity"></activity>
         <activity android:name="MyCompleteStoriesFeed"></activity>
+        <activity android:name="Profile"></activity>
     </application>
 
 </manifest>

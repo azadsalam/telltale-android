@@ -6,6 +6,9 @@
     android:background="@drawable/back"
     
     >
+    <include 
+        layout="@layout/top"/>
+    
 
     <ListView
         android:id="@+id/lv_append_suggestion_appended"

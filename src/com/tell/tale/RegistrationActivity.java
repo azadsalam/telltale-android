@@ -60,7 +60,7 @@ public class RegistrationActivity extends Activity implements OnClickListener,We
     	
     	
     	
-        wsu = new WebServiceAdapter(this,this,"Please Wait!!","http://10.0.2.2/telltale/index.php/registration/do_registration_from_android",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Please Wait!!","https://telltale-azad.rhcloud.com/index.php/registration/do_registration_from_android",data,replyTokens);
 		wsu.startWebService();
 		
 	}

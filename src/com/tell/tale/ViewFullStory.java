@@ -55,7 +55,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
 
 		//FETCH STORY FROM SERVER
         prepareData();
-		wsu = new WebServiceAdapter(this,this,"Loading Story!!","http://10.0.2.2/telltale/index.php/completedStory_feed/getFullStoryFromAndroid",data,replyTokens);        
+		wsu = new WebServiceAdapter(this,this,"Loading Story!!","https://telltale-azad.rhcloud.com/index.php/completedStory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
 	}	

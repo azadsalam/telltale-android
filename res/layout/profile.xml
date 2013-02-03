@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/back"
+   
+    >
+    <include 
+    layout="@layout/top"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/hey"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_orandge" />
+
+    <TextView
+        android:id="@+id/tv_pro_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dip" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/point"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_orandge" />
+
+    <TextView
+        android:id="@+id/tv_pro_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dip"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/initiatated"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_orandge" />
+
+    <TextView
+        android:id="@+id/tv_pro_init"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/comment"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_orandge" />
+
+    <TextView
+        android:id="@+id/tv_pro_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/appended"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_orandge" />
+
+    <TextView
+        android:id="@+id/tv_pro_appends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" />
+
+</LinearLayout>

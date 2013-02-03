@@ -69,7 +69,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 
 		//FETCH STORY FROM SERVER
         prepareData();
-		wsu = new WebServiceAdapter(this,this,"Loading Story!!","http://10.0.2.2/telltale/index.php/ongoingstory_feed/getFullStoryFromAndroid",data,replyTokens);        
+		wsu = new WebServiceAdapter(this,this,"Loading Story!!","https://telltale-azad.rhcloud.com/index.php/ongoingStory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
 	}
@@ -302,7 +302,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		xtra.putInt("pid", pid);
 		intent.putExtras(xtra);
 		startActivity(intent);
-
+		//finish();
 	}
 	
 
@@ -320,7 +320,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 			
 		   	data = new HashMap<String, Object>();    	
 	    	data.put("pid",appendedPid);    	
-			wsu = new WebServiceAdapter(this,c,"Updating your story!!","http://10.0.2.2/telltale/index.php/add_comment/appendFromAndroid",data,replyTokens);        
+			wsu = new WebServiceAdapter(this,c,"Updating your story!!","https://telltale-azad.rhcloud.com/index.php/add_comment/appendFromAndroid",data,replyTokens);        
 	        startWebService();
 
 	    	

@@ -70,7 +70,7 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 	 	
 	 	//reply tokens
 	 	
-	     wsu = new WebServiceAdapter(this,this,"Downloading Data!!","http://10.0.2.2/telltale/index.php/personalOngoingStory_feed/my_ongoing_feed_from_android",data,replyTokens);
+	     wsu = new WebServiceAdapter(this,this,"Downloading Data!!","https://telltale-azad.rhcloud.com/index.php/personalOngoingStory_feed/my_ongoing_feed_from_android",data,replyTokens);
 		 wsu.startWebService();
 		
 			
@@ -115,12 +115,16 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
-		Data data = dataArray[position];
-		Intent intent = new Intent(this,AppendSuggestionActivity.class);
-		Bundle xtra = new Bundle();
-		xtra.putInt("pid", data.pid);
-		intent.putExtras(xtra);
-		startActivity(intent);
+		if(dataArray[position] != null)
+		{
+			Data data = dataArray[position];
+			Intent intent = new Intent(this,AppendSuggestionActivity.class);
+			Bundle xtra = new Bundle();
+			xtra.putInt("pid", data.pid);
+			intent.putExtras(xtra);
+			startActivity(intent);
+			finish();
+		}
 		   // Toast.makeText(getApplicationContext(),"Click ListItem Number " + position, Toast.LENGTH_LONG).show();
 	}
 

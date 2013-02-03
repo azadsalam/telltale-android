@@ -57,8 +57,10 @@ public class WebServiceAdapter
 				
 				for(int i=0;i<replyTokens.length;i++)
 				{
-					
-					reply.put(replyTokens[i], jsonObject.get(replyTokens[i]));
+					if(jsonObject.get(replyTokens[i]) != null)
+						reply.put(replyTokens[i], jsonObject.get(replyTokens[i]));
+					else
+						reply.put(replyTokens[i],null);
 					
 					Log.d("SERVER REPLY",replyTokens[i] + " ->"+jsonObject.get(replyTokens[i]));
 				}
