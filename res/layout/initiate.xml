@@ -27,11 +27,11 @@
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="fill_parent" >
-
+
             <EditText
                 android:id="@+id/editText_id_initial"
                 android:layout_width="match_parent"
-                android:layout_height="314dip"
+                android:layout_height="347dp"
                 android:inputType="textMultiLine" >
 
                 <requestFocus />
