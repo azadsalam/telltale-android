@@ -27,6 +27,9 @@
         <activity android:name="CompleteStoriesFeed"></activity>
         <activity android:name=".MyOngoingFeedActivity"></activity>
         <activity android:name="AppendSuggestionActivity"></activity>
+        <activity android:name="ViewFullStory"></activity>
+        <activity android:name="RegistrationActivity"></activity>
+        <activity android:name="MyCompleteStoriesFeed"></activity>
     </application>
 
 </manifest>

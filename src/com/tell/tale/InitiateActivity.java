@@ -3,6 +3,7 @@ package com.tell.tale;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -66,6 +67,10 @@ public class InitiateActivity extends Activity implements OnClickListener,WebSer
 	{
 		// TODO Auto-generated method stub
 		Toast.makeText(getApplicationContext(), "Story Posted\n: "+text,	Toast.LENGTH_LONG).show();
+		
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
+		finish();
 	}
 
 }

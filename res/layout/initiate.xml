@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/back"
+   >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_text_initiate_story"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:textColor="@color/text_dark_green"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -38,6 +41,10 @@
         android:id="@+id/submit_initiate"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/btn_text_submit" />
+        android:text="@string/btn_text_submit" 
+        android:background="@drawable/button_shape" 
+        android:layout_marginBottom="5dip"
+        
+        />
 
 </LinearLayout>

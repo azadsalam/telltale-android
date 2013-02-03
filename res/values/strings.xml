@@ -28,5 +28,12 @@
     <string name="tv_approve_append_suggestion_sure">Are you sure you want to append this suggestion to your story ???</string>
     <color name="Red">#12EF53</color>
     <string name="tv_approve_append_suggestion_isEnd">This suggestion was marked end. Adding this will complete your story </string>
-
+    <string name="tv_view_full_story">Viewing Full Story</string>
+    <string name="tv_name">Name</string>
+    <color name="background">#FCFFF2</color>
+    <color name="transparent">#99FFFFFF</color>
+    <color name="text_dark_green">#FE192B0C</color>
+    <color name="text_orandge">#FFf0742d</color>
+    <color name="text_light_orange">#AAf0742d</color>
+    
 </resources>

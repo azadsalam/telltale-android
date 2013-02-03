@@ -6,7 +6,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,17 +19,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnItemClickListener
+public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,OnItemClickListener
 {
 	String replyTokens[] ;
 	HashMap<String, Object> data ;    				
 	
 	
 	int start = 0;
-	int count = 10;
+	int count = 5;
 	
 	ListView listView;
 	Data dataArray[];
+
+	int nid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -42,6 +46,9 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		
 		listView = (ListView) findViewById(R.id.lv_completed_feed);
 		
+		SharedPreferences myPrefs = this.getSharedPreferences("telltaleprefs", MODE_WORLD_READABLE);
+		nid = myPrefs.getInt("nid", 0);
+
 		
 		getData(start,count);
 
@@ -51,8 +58,10 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
     	
 
     	WebServiceAdapter wsu;
-		data.put("start",new String(""+start));
+		
+    	data.put("start",new String(""+start));
     	data.put("count",new String(""+count));
+    	data.put("nid", new String(""+nid));
     	
     	replyTokens = new String[count];
     	
@@ -63,7 +72,7 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","http://10.0.2.2/telltale/index.php/completedStory_feed/getCompletedStoriesFeedFromAndroid",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","http://10.0.2.2/telltale/index.php/personalcompletedStory_feed/getCompletedStoriesFeedFromAndroid",data,replyTokens);
 		wsu.startWebService();
 		
     }
@@ -87,7 +96,7 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		{
 		    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		    
-		    View rowView = inflater.inflate(R.layout.ongoing_feed_row, parent, false);
+		    View rowView = inflater.inflate(R.layout.appended_row, parent, false);
 		    
 		    
 		    if(data[position]!=null)
@@ -140,8 +149,9 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		for (int i=0;i<count;i++)
 		{
 			//String index = new String("R"+(i+start));
-			//Log.d("ONGOING ROW: ",replyTokens[i]+"->");		
+
 			Object ret = (data.get(replyTokens[i]));
+			Log.d("MY COMPLETE ROW: " + i ,replyTokens[i]+"-> " + ret.toString());		
 			if(ret==null)continue;
 			String row =ret.toString();
 			//Log.d("ONGOING ROW: ",replyTokens[i]+"->"+row);
@@ -151,9 +161,10 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 			{
 				JSONObject json = new JSONObject(row);
 				
+				
 				dataArray[i] = new Data();
 				dataArray[i].id = (i+start);
-				dataArray[i].username = json.getString("name");
+				//dataArray[i].username = json.getString("name");
 				dataArray[i].text = json.getString("text");
 				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
 				dataArray[i].nid = Integer.parseInt(json.getString("nid"));

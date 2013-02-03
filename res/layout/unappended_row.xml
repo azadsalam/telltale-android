@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/username" 
         android:gravity="right"
-
+		android:textColor="@color/text_orandge"
         />
 
     <TextView
@@ -20,20 +20,22 @@
         android:text="@string/likeCount"
         android:textAppearance="?android:attr/textAppearanceSmall" 
         android:gravity="right"
+        android:visibility="gone"
         />
 
     <TextView
         android:id="@+id/tv_isSuggestedEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="" 
+        android:textColor="@color/text_dark_green"/>
 
     <TextView
         android:id="@+id/tv_id_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text"
-       
-        android:gravity="right"/>
+        android:gravity="right"
+        android:textColor="@color/text_dark_green"/>
 
 </LinearLayout>

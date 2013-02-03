@@ -50,13 +50,21 @@
         android:id="@+id/btn_approve_append_suggestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_approve_apppend_suggestion" />
+        android:text="@string/btn_approve_apppend_suggestion" 
+        
+        android:background="@drawable/button_shape" 
+        android:layout_marginBottom="5dip"
+        />
 
     <Button
         android:id="@+id/btn_append_close_popup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_cancel" />
+        android:text="@string/btn_cancel"
+        
+        android:background="@drawable/button_shape" 
+        android:layout_marginBottom="5dip"
+         />
 
         </LinearLayout>
     </LinearLayout>

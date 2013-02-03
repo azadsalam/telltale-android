@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class TellTaleActivity extends Activity implements OnClickListener,WebServiceUser
 {
-	Button login;
+	Button login,btn_registration;
 	EditText mail,password;
 	HashMap<String, Object> data ;    				
 
@@ -36,12 +36,15 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
         
         data = new HashMap<String, Object>();    				
         login = (Button) findViewById(R.id.login);
+        btn_registration = (Button) findViewById(R.id.btn_registration);
         mail = (EditText) findViewById(R.id.editText_id_mail);
         password = (EditText) findViewById(R.id.editText_id_password);
+        
         
         mail.setText("salam_azad223@yahoo.com");
         password.setText(":p");
         login.setOnClickListener(this);
+        btn_registration.setOnClickListener(this);
         
     }
 
@@ -58,7 +61,7 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 			
 			intent = new Intent(this,HomeActivity.class);
 			startActivity(intent);
-			
+			this.finish();
 			/* FOR NOW DISABLE LOG IN
 			WebServiceAdapter wsu;
 			data.put("mail",mail.getText().toString());
@@ -70,7 +73,11 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 			wsu.startWebService();
 			*/
 			break;
-
+		case R.id.btn_registration:
+			intent = new Intent(this,RegistrationActivity.class);
+			startActivity(intent);
+			this.finish();
+			break;
 		default:
 			break;
 		}

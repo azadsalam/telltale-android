@@ -13,48 +13,65 @@ public final class R {
     public static final class color {
         public static final int R=0x7f050000;
         public static final int Red=0x7f050001;
+        public static final int background=0x7f050002;
+        public static final int text_dark_green=0x7f050004;
+        public static final int text_light_orange=0x7f050006;
+        public static final int text_orandge=0x7f050005;
+        public static final int transparent=0x7f050003;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int back=0x7f020000;
+        public static final int button_shape=0x7f020001;
+        public static final int button_shape_focused=0x7f020002;
+        public static final int button_shape_normal=0x7f020003;
+        public static final int button_shape_pressed=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int logo=0x7f020006;
     }
     public static final class id {
         public static final int btn_append_close_popup=0x7f060004;
         public static final int btn_approve_append_suggestion=0x7f060003;
         public static final int btn_completed_story_feed=0x7f060011;
-        public static final int btn_contribute=0x7f060026;
+        public static final int btn_contribute=0x7f06002c;
         public static final int btn_id_see_ongoing_stories=0x7f060010;
         public static final int btn_my_initiated_ongoing=0x7f060014;
         public static final int btn_my_initiated_stories=0x7f060013;
         public static final int btn_my_ongoing_feed_see_more=0x7f06001f;
+        public static final int btn_reg_submit=0x7f060027;
+        public static final int btn_registration=0x7f06001d;
         public static final int btn_see_more_completed_feed=0x7f06000b;
         public static final int btn_submit_suggestion=0x7f06000e;
-        public static final int button2=0x7f06001d;
         public static final int button4=0x7f060012;
         public static final int cb_is_this_end =0x7f06000d;
         public static final int editText_id_initial=0x7f060017;
         public static final int editText_id_mail=0x7f060019;
         public static final int editText_id_password=0x7f06001b;
         public static final int et_contribution_txt=0x7f06000c;
+        public static final int et_mail=0x7f060023;
+        public static final int et_name=0x7f060024;
+        public static final int et_password=0x7f060026;
         public static final int initiate=0x7f06000f;
         public static final int linearLayout1=0x7f060016;
         public static final int listView_id_ongoing_feed=0x7f060022;
         public static final int login=0x7f06001c;
         public static final int lv_append_suggestion_appended=0x7f060005;
         public static final int lv_append_suggestion_unappended=0x7f060006;
-        public static final int lv_appended_posts=0x7f060024;
+        public static final int lv_appended_posts=0x7f06002a;
         public static final int lv_completed_feed=0x7f06000a;
+        public static final int lv_full_story=0x7f060029;
         public static final int lv_my_ongoing_feed=0x7f06001e;
-        public static final int lv_unappended_posts=0x7f060025;
+        public static final int lv_unappended_posts=0x7f06002b;
         public static final int scrollView1=0x7f060015;
         public static final int submit_initiate=0x7f060018;
         public static final int textView1=0x7f060000;
         public static final int textView2=0x7f06001a;
+        public static final int textView3=0x7f060025;
         public static final int tv_append_confirm_isSuggestedEnd=0x7f060002;
         public static final int tv_append_confirm_post=0x7f060001;
         public static final int tv_id_likeCount=0x7f060008;
         public static final int tv_id_text=0x7f060009;
         public static final int tv_id_username=0x7f060007;
-        public static final int tv_isSuggestedEnd=0x7f060023;
+        public static final int tv_isSuggestedEnd=0x7f060028;
         public static final int tv_my_ongoing_row_like_count=0x7f060021;
         public static final int tv_my_ongoing_row_text=0x7f060020;
     }
@@ -71,8 +88,10 @@ public final class R {
         public static final int my_ongoing_feed_row=0x7f030009;
         public static final int ongoing_feed=0x7f03000a;
         public static final int ongoing_feed_row=0x7f03000b;
-        public static final int unappended_row=0x7f03000c;
-        public static final int view_ongoing_story=0x7f03000d;
+        public static final int registration=0x7f03000c;
+        public static final int unappended_row=0x7f03000d;
+        public static final int view_full_story=0x7f03000e;
+        public static final int view_ongoing_story=0x7f03000f;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
@@ -96,9 +115,11 @@ public final class R {
         public static final int text=0x7f04000f;
         public static final int tv_approve_append_suggestion_isEnd=0x7f040018;
         public static final int tv_approve_append_suggestion_sure=0x7f040017;
+        public static final int tv_name=0x7f04001a;
         public static final int tv_text_initiate_=0x7f04000a;
         public static final int tv_text_password=0x7f040009;
         public static final int tv_text_username=0x7f040008;
+        public static final int tv_view_full_story=0x7f040019;
         public static final int username=0x7f04000d;
     }
 }
