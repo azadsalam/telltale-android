@@ -4,13 +4,9 @@ import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.tell.tale.ViewOnGoingStory.DataAdapter;
-
-
-
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +33,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
 	int post_count;
 	
 
+	int nid;
 	int pid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -49,17 +46,21 @@ public class ViewFullStory extends Activity implements WebServiceUser
 		Bundle bundle = getIntent().getExtras();
 		pid = bundle.getInt("pid");
 		
+		SharedPreferences myPrefs = getSharedPreferences("telltaleprefs",MODE_WORLD_READABLE);
+		nid = myPrefs.getInt("nid", 0);
 
+		
 		// FOR VIEWING APPENDED POSTS
         listview = (ListView) findViewById(R.id.lv_full_story); 
 
 		//FETCH STORY FROM SERVER
         prepareData();
-		wsu = new WebServiceAdapter(this,this,"Loading Story!!","https://telltale-azad.rhcloud.com/index.php/completedStory_feed/getFullStoryFromAndroid",data,replyTokens);        
+		wsu = new WebServiceAdapter(this,this,"Loading Story!!",Session.baseUrl+"/index.php/completedStory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
 	}	
 	
+	/*
 	class DataAdapter extends ArrayAdapter<Data> 
     {
     	final Context context;
@@ -97,8 +98,9 @@ public class ViewFullStory extends Activity implements WebServiceUser
     	}
     }
 	
+	*/
 	
-	
+	/*
     private void populateDataArray(JSONObject jsonArray, Data dataArray[],int count) 
     {
 		for (int i=0;i<count;i++)
@@ -130,6 +132,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
 			}
 		}
 	}
+	*/
     
     // PARSE SERVER REPLY , POPULATE IN DATA ARRAY
     public void processResult(HashMap<String, Object> data) 
@@ -155,7 +158,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
 			try 
 			{
 				JSONObject json = new JSONObject(reply.get("post_array").toString());
-				populateDataArray(json, posts,post_count);
+				PopulateDataArrayForStory.populateDataArray(json, posts,post_count);
 				
 				
 			} 
@@ -172,7 +175,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
 		if(posts != null)
 		{
 		
-	    	DataAdapter appended_adapter = new DataAdapter(this, posts,R.layout.appended_row);		
+	    	DataAdapterForStory	 appended_adapter = new DataAdapterForStory(this,this, posts,R.layout.appended_row,R.id.btn_like_appended);		
 			listview.setAdapter(appended_adapter); 
 			
 		}		
@@ -189,7 +192,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
         //to be sent to server 
     	data = new HashMap<String, Object>();    	
     	data.put("pid",pid);    	
-    	
+    	data.put("nid", nid);
     	//reply tokens
     	replyTokens = new String[2];
     	replyTokens[0] = "post_array";

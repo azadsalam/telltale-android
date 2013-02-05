@@ -8,19 +8,40 @@
     >
     <include 
         layout="@layout/top"/>
-    
+     <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tv_appended_part"
+        android:textColor="@color/text_orandge" />
 
+    
     <ListView
         android:id="@+id/lv_append_suggestion_appended"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        >
+        android:layout_height="217dp"
+        android:cacheColorHint="#00000000" >
+
     </ListView>
+    
+        <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tv_unappended_part"
+        android:textColor="@color/text_orandge" />
+    
 
     <ListView
         android:id="@+id/lv_append_suggestion_unappended"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" 
+        android:cacheColorHint="#00000000"
+        >
     </ListView>
 
 </LinearLayout>

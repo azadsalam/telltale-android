@@ -10,5 +10,5 @@ public class Data
 	String text;
 	String username;
 	Boolean isSuggestedEnd = false;
-	
+	boolean isLikedByUser = false;
 }

@@ -8,7 +8,7 @@
         android:id="@+id/tv_id_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/username" 
+        android:text="" 
         android:gravity="right"
 		android:textColor="@color/text_orandge"
         />
@@ -38,5 +38,12 @@
         android:text="@string/text"
         android:gravity="right"
         android:textColor="@color/text_dark_green"/>
+
+    <Button
+        android:id="@+id/btn_like_unappended"
+        android:layout_width="60dp"
+        android:layout_height="47dp"
+        android:background="@drawable/like_image"
+        android:text="" />
 
 </LinearLayout>

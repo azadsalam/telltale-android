@@ -25,7 +25,7 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 	HashMap<String, Object> data ;    				
 	
 	int start = 0;
-	int count = 5;
+	int count = 10;
 	
 	ListView listView;
 	
@@ -70,7 +70,7 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 	 	
 	 	//reply tokens
 	 	
-	     wsu = new WebServiceAdapter(this,this,"Downloading Data!!","https://telltale-azad.rhcloud.com/index.php/personalOngoingStory_feed/my_ongoing_feed_from_android",data,replyTokens);
+	     wsu = new WebServiceAdapter(this,this,"Downloading Data!!",Session.baseUrl+"/index.php/personalOngoingStory_feed/my_ongoing_feed_from_android",data,replyTokens);
 		 wsu.startWebService();
 		
 			

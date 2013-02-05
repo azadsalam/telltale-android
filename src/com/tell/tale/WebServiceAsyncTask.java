@@ -124,7 +124,7 @@ public class WebServiceAsyncTask extends AsyncTask<String, String, String>
 	               text = sb.toString();
 	           }
 	           
-           		Log.d("SERVER RAW REPLY", text);
+           	Log.d("SERVER RAW REPLY", text);
 	       
 	           
 	           return text;
@@ -152,7 +152,8 @@ public class WebServiceAsyncTask extends AsyncTask<String, String, String>
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);	
 		//Log.d("ON POST EXECUTE , SERVER RAW REPLY ", result);
-		webServiceUser.processReply(result);
+		if(webServiceUser !=null)
+			webServiceUser.processReply(result);
 	}
 
 }

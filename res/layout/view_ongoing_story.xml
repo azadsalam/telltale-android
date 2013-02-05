@@ -2,35 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
     android:background="@drawable/back"
-    >
-<include 
-    layout="@layout/top"/>
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tv_appended_part"
+        android:textColor="@color/text_orandge" />
+
     <ListView
         android:id="@+id/lv_appended_posts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-         >
+        android:layout_height="167dp"
+        android:layout_weight="0.54"
+        android:cacheColorHint="#00000000"
+        android:gravity="right" >
 
     </ListView>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tv_unappended_part"
+        android:textColor="@color/text_orandge" />
 
     <ListView
         android:id="@+id/lv_unappended_posts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        >
-
+        android:layout_height="118dp"
+        android:cacheColorHint="#00000000" >
     </ListView>
-    
+
     <Button
         android:id="@+id/btn_contribute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_text_contribute_post"
-        android:background="@drawable/button_shape" 
         android:layout_marginBottom="5dip"
-         />
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_text_contribute_post" />
 
 </LinearLayout>

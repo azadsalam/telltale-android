@@ -72,7 +72,7 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Downloading Data!!","https://telltale-azad.rhcloud.com/index.php/completedStory_feed/getCompletedStoriesFeedFromAndroid",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Downloading Data!!",Session.baseUrl+"/index.php/completedStory_feed/getCompletedStoriesFeedFromAndroid",data,replyTokens);
 		wsu.startWebService();
 		
     }

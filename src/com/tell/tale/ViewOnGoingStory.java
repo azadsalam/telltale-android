@@ -5,12 +5,11 @@ import java.util.HashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.tell.tale.OnGoingFeed.Data;
-import com.tell.tale.OnGoingFeed.DataAdapter;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +43,9 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 	Button btn_contribute;
 	TextView tv_test;
 	
+	
+	//
+	int nid;
 	//Last appended
 	int lastAppendedPostId; 	
 	int pid;
@@ -59,6 +61,11 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 		//Log.d("PID : ",""+pid);
 		
 		
+		SharedPreferences myPrefs = getSharedPreferences("telltaleprefs",MODE_WORLD_READABLE);
+		nid = myPrefs.getInt("nid", 0);
+
+
+		
 		btn_contribute = (Button) findViewById(R.id.btn_contribute);
 		btn_contribute.setOnClickListener(this);
 		
@@ -69,7 +76,7 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 
 		//FETCH STORY FROM SERVER
         prepareData();
-		wsu = new WebServiceAdapter(this,this,"Loading Story!!","https://telltale-azad.rhcloud.com/index.php/ongoingStory_feed/getFullStoryFromAndroid",data,replyTokens);        
+		wsu = new WebServiceAdapter(this,this,"Loading Story!!",Session.baseUrl+"/index.php/ongoingStory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
  		
@@ -87,97 +94,9 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 	}
 	
     // this class is for your data , customize it , as you want
-    class Data
-    {
+  
 
-    	int id;
-    	
-    	int pid;
-    	int nid;
-    	int likeCount;
-    	String text;
-    	String username;
-    	//( post er pid, text, nid and like count , nid er name)
-    	
-    }
-
-
-    class DataAdapter extends ArrayAdapter<Data> 
-    {
-    	final Context context;
-    	final Data[] data;
-    	int row_layout;
-    	public DataAdapter(Context c,Data[] d,int row_layout) 
-    	{
-			// TODO Auto-generated constructor stub
-    		super(c,row_layout,d);
-    		context = c;
-    		data = d;
-    		this.row_layout= row_layout;
-		}
-    	
-    	// this getView function automatically 
-    	// fills up your each row with your data object
-    	
-    	@Override
-    	public View getView(int position, View convertView, ViewGroup parent) {
-    		// TODO Auto-generated method stub
-    		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    		View rowView = inflater.inflate(row_layout, parent, false);
-    		
-    		
-		    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
-		    text.setText(data[position].text);
-		    
-		    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
-		    likeCount.setText(""+data[position].likeCount);
-		    
-		    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
-		    username.setText(data[position].username);
-    		
-    		return rowView;
-    	}
-    }
-	
-	
-	
-    
-    private void populateDataArray(JSONObject jsonArray, Data dataArray[],int count) 
-    {
-
-    	
-    	
-		for (int i=0;i<count;i++)
-		{
-
-			try 
-			{
-				String row = jsonArray.get(""+i).toString();
-				if(row==null)continue;
-				Log.d("ONGOING ROW "+i+" : "," -> "+row);
-				
-
-				JSONObject json = new JSONObject(row);
-				
-				dataArray[i] = new Data();
-				dataArray[i].id = (i);
-				dataArray[i].username = json.getString("name");
-				dataArray[i].text = json.getString("text");
-				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
-				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
-				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
-				
-			
-			} 
-			catch (Exception e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-	}
-    // PARSE SERVER REPLY , POPULATE IN DATA ARRAY
+        // PARSE SERVER REPLY , POPULATE IN DATA ARRAY
     public void processResult(HashMap<String, Object> data) 
 	{
 		// TODO Auto-generated method stub
@@ -189,7 +108,7 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 		
 		if(((Boolean)reply.get("error")).booleanValue()==true)
 		{
-			ans="ERROR OCCURED";
+			Toast.makeText(this, "Could Not Connect to Server!", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
@@ -203,9 +122,9 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 			try 
 			{
 				JSONObject json = new JSONObject(reply.get("appended_post_array").toString());
-				populateDataArray(json, appendedPosts,appended_post_count);
+				PopulateDataArrayForStory.populateDataArray(json, appendedPosts,appended_post_count);
 				json = new JSONObject(reply.get("Unappended_part_array").toString());
-				populateDataArray(json, unappendedPosts,unappended_part_count);
+				PopulateDataArrayForStory.populateDataArray(json, unappendedPosts,unappended_part_count);
 				
 				
 			} 
@@ -222,15 +141,15 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 		if(appendedPosts != null)
 		{
 		
-	    	DataAdapter appended_adapter = new DataAdapter(this, appendedPosts,R.layout.appended_row);		
+	    	DataAdapterForStory appended_adapter = new DataAdapterForStory(this,this, appendedPosts,R.layout.appended_row,R.id.btn_like_appended);		
 			appended_listview.setAdapter(appended_adapter); 
 			lastAppendedPostId = appendedPosts[appended_post_count-1].pid;
-			Log.d("viewongoing ACTIVITY : "," lastappendedpostid "+lastAppendedPostId);
+			//Log.d("viewongoing ACTIVITY : "," lastappendedpostid "+lastAppendedPostId);
 		}		
 	    	
     	if(unappendedPosts != null)
     	{
-    		DataAdapter unappended_adapter = new DataAdapter(this, unappendedPosts,R.layout.unappended_row);		
+    		DataAdapterForStory unappended_adapter = new DataAdapterForStory(this,this, unappendedPosts,R.layout.unappended_row,R.id.btn_like_unappended);		
     		Unappended_listview.setAdapter(unappended_adapter); 
     	}
 				
@@ -243,7 +162,8 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
     {
         //to be sent to server 
     	data = new HashMap<String, Object>();    	
-    	data.put("pid",pid);    	
+    	data.put("pid",pid);   
+    	data.put("nid", nid);
     	
     	//reply tokens
     	replyTokens = new String[4];

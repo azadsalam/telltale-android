@@ -34,7 +34,7 @@ public class Profile extends Activity implements WebServiceUser
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Please Wait!!","https://telltale-azad.rhcloud.com/index.php/profile/get_point_from_android",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Please Wait!!",Session.baseUrl+"/index.php/profile/get_point_from_android",data,replyTokens);
 		wsu.startWebService();
 		
 	}

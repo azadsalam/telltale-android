@@ -42,5 +42,7 @@
     <string name="initiatated">No. of Stories you have initiated</string>
     <string name="appended">No. of Appended Posts</string>
     <string name="hey">Hi !! </string>
+    <string name="tv_appended_part">Appended Part</string>
+    <string name="tv_unappended_part">Unappended Part</string>
     
 </resources>

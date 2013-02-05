@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
@@ -22,6 +21,7 @@ public class WebServiceAdapter
 	protected String loadingText;
 	protected HashMap<String, Object> data;
 	protected HashMap<String, Object> reply;
+	protected boolean showProcessDialog = true;
 	
 	public WebServiceAdapter(WebServiceUser user,Context ct,String loadText,String url,HashMap<String, Object> data,String replyTokens[]) 
 	{
@@ -33,9 +33,24 @@ public class WebServiceAdapter
 		this.replyTokens = replyTokens;
 		asyncTask = new WebServiceAsyncTask(this,url,data);
 		reply = new HashMap<String, Object>();
-		
+		showProcessDialog = true;
 	}
 	
+	
+	public WebServiceAdapter(WebServiceUser user,Context ct,String loadText,String url,HashMap<String, Object> data,String replyTokens[],boolean showProcessDialog) 
+	{
+		// TODO Auto-generated constructor stub	
+		
+		this.user = user; 
+		context=ct;
+		loadingText	 = loadText;
+		this.data = data;
+		this.replyTokens = replyTokens;
+		asyncTask = new WebServiceAsyncTask(this,url,data);
+		reply = new HashMap<String, Object>();
+		this.showProcessDialog = showProcessDialog;
+		
+	}
 	
 	
 	public void startWebService()
@@ -72,10 +87,18 @@ public class WebServiceAdapter
 				reply.put("error", true);
 			}
 		}
+		else if(jsonData == null)
+		{
+			reply.put("error", true);
+		}
 		//Log.d("ME", jsonData);
 		
 		user.processResult(reply);
-		pd.dismiss();
+		
+		if(showProcessDialog)
+		{
+			pd.dismiss();
+		}
 	}
 	
 	public void setContext(Context ct)
@@ -85,7 +108,10 @@ public class WebServiceAdapter
 	
 	public void showProcessDialog()
 	{
-		pd = ProgressDialog.show(context, "", loadingText);
+		if(showProcessDialog)
+		{
+			pd = ProgressDialog.show(context, "", loadingText);
+		}
 	}
 
 }

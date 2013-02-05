@@ -12,7 +12,9 @@
         android:id="@+id/lv_completed_feed"
         android:layout_width="match_parent"
         android:layout_height="370dip"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+         >
 
     </ListView>
 

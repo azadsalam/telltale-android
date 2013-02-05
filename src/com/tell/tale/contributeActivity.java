@@ -69,7 +69,7 @@ public class ContributeActivity extends Activity implements OnClickListener, Web
     	
     	//reply tokens
     	
-        wsu = new WebServiceAdapter(this,this,"Adding your Contribution!!","https://telltale-azad.rhcloud.com/index.php/add_comment/addSuggestionFromAndroid",data,replyTokens);
+        wsu = new WebServiceAdapter(this,this,"Adding your Contribution!!",Session.baseUrl+"/index.php/add_comment/addSuggestionFromAndroid",data,replyTokens);
         wsu.startWebService();
 		
 	}
@@ -78,7 +78,7 @@ public class ContributeActivity extends Activity implements OnClickListener, Web
 	public void processResult(HashMap<String, Object> data) 
 	{
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "Added your suggestion", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(), "Added your contribution", Toast.LENGTH_LONG).show();
 		
 		Intent intent = new Intent(this,HomeActivity.class);
 		startActivity(intent);
