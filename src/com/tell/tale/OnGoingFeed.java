@@ -78,7 +78,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
     	
     	for (int i=0;i < count;i++)
     	{
-    		replyTokens[i] = new String("R"+(i+start));
+    		replyTokens[i] = new String(""+(i+start));
     	}
     	
     	//reply tokens

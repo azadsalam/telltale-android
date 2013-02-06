@@ -23,14 +23,12 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 {
 	String replyTokens[] ;
 	HashMap<String, Object> data ;    				
+	FeedHelper feedHelper;
 	
 	
-	int start = 0;
-	int count = 0;
-	int increment = 2;
 	
 	ListView listView;
-	Data dataArray[];
+	
 	
 	Button btn_see_more ;
 
@@ -41,20 +39,24 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.completed_stories_feed);
 		
-		
-		btn_see_more = (Button) findViewById(R.id.btn_see_more_completed_feed);
-		btn_see_more.setOnClickListener(this);
-		
-		
 		data = new HashMap<String, Object>();    				
 		//lv = (ListView) findViewById(R.id.listView_id_ongoing_feed);
 		
 		listView = (ListView) findViewById(R.id.lv_completed_feed);
+		btn_see_more = (Button) findViewById(R.id.btn_see_more_completed_feed);
+		btn_see_more.setOnClickListener(this);
+
+
+		String url = (Session.baseUrl+"/index.php/completedStory_feed/getCompletedStoriesFeedFromAndroid");
+		feedHelper = new FeedHelper(this,this,this,listView,btn_see_more,data,replyTokens,url);
 		
 		
-		getData(start,increment);
+		
+		
+		feedHelper.getData(feedHelper.count,feedHelper.increment);
 
 	}
+	/*
     public void getData(int start,int increment)
     {
     	
@@ -76,9 +78,9 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		wsu.startWebService();
 		
     }
-
+	*/
 	
-	
+	/*
 	class DataAdapter extends ArrayAdapter<Data>
 	{
 		final Context context;
@@ -120,11 +122,11 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 	
 	}
 
-
+	*/
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
 		
-		Data data = dataArray[position];
+		Data data = feedHelper.dataArray[position];
 		if(data != null)
 		{
 			Intent intent = new Intent(this,ViewFullStory.class);
@@ -146,6 +148,10 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		
 		// [pid] => 9 [nid] => 1 [text] => HELLO [name] => Azad [vote] => 0
 		
+		
+		
+		feedHelper.processResult(data);
+		/*
 		Data[] temp = new Data[count+increment];
 		
 		if(dataArray != null)
@@ -187,6 +193,7 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
 		
 		
@@ -212,13 +219,11 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		listView.setAdapter(adapter); 
 		// pass the context(this) and the dataArray to fillup your listView (dataArray)
 		listView.setOnItemClickListener(this); 
-
+		*/
 	}
 	public void onClick(View v) 
 	{
-		// TODO Auto-generated method stub
-		
-		getData(count, increment);
-		
+		// TODO Auto-generated method stub		
+		feedHelper.getData(feedHelper.count	, feedHelper.increment);
 	}	
 }
