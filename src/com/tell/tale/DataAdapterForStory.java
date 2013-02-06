@@ -32,6 +32,7 @@ class DataAdapterForStory extends ArrayAdapter<Data> implements OnClickListener
 	int buttonId;
 	Activity activity;
 	int nid;
+	boolean showIsSuggestedEndText=false;
 	public DataAdapterForStory(Context c,Activity activity,Data[] d,int row_layout,int buttonId) 
 	{
 		// TODO Auto-generated constructor stub
@@ -65,6 +66,24 @@ class DataAdapterForStory extends ArrayAdapter<Data> implements OnClickListener
 	    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
 	    username.setText(data[position].username);
 		
+	    if(showIsSuggestedEndText)
+	    {
+		    TextView isSuggestedEnd = (TextView) rowView.findViewById(R.id.tv_isSuggestedEnd);
+		    try
+		    {
+	
+		    	if(data[position].isSuggestedEnd)
+	    		{
+		    		isSuggestedEnd.setText("SUGGESTED END");	
+	    		}
+		    	
+		    }
+		    catch (Exception e) {
+				// TODO: handle exception
+			}
+	    }
+
+	    
 	    Button btn = (Button) rowView.findViewById(buttonId);
 		
 	    if(data[position].isLikedByUser)

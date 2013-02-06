@@ -86,7 +86,6 @@ public class ViewOnGoingStory extends Activity implements WebServiceUser,OnClick
 	{
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(this,ContributeActivity.class);
-		
 		Bundle bundle = new Bundle();
 		bundle.putInt("lastAppendedPostId", lastAppendedPostId);
 		intent.putExtras(bundle);

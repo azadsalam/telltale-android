@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -49,6 +50,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 	Button btn_contribute;
 	TextView tv_test;
 	
+	int nid;
 	//Last appended
 	int pid;
 
@@ -62,6 +64,10 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		Bundle bundle = getIntent().getExtras();
 		pid = bundle.getInt("pid");
 		
+		
+		SharedPreferences myPrefs = getSharedPreferences("telltaleprefs",MODE_WORLD_READABLE);
+		nid = myPrefs.getInt("nid", 0);
+		
 		// FOR VIEWING APPENDED POSTS
         appended_listview = (ListView) findViewById(R.id.lv_append_suggestion_appended); 
         Unappended_listview = (ListView)findViewById(R.id.lv_append_suggestion_unappended);
@@ -73,7 +79,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
         startWebService();
 
 	}
-	
+	/*
 	class DataAdapter extends ArrayAdapter<Data> 
     {
     	final Context context;
@@ -128,7 +134,8 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 	
 	
 	
-    
+    */
+	/*
     private void populateDataArray(JSONObject jsonArray, Data dataArray[],int count) 
     {
 
@@ -164,6 +171,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		}
 
 	}
+	*/
     // PARSE SERVER REPLY , POPULATE IN DATA ARRAY
     public void processResult(HashMap<String, Object> data) 
 	{
@@ -176,7 +184,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		
 		if(((Boolean)reply.get("error")).booleanValue()==true)
 		{
-			ans="ERROR OCCURED";
+			Toast.makeText(this, "Could Not Connect to Server!", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
@@ -190,9 +198,9 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 			try 
 			{
 				JSONObject json = new JSONObject(reply.get("appended_post_array").toString());
-				populateDataArray(json, appendedPosts,appended_post_count);
+				PopulateDataArrayForStory.populateDataArray(json, appendedPosts,appended_post_count);
 				json = new JSONObject(reply.get("Unappended_part_array").toString());
-				populateDataArray(json, unappendedPosts,unappended_part_count);
+				PopulateDataArrayForStory.populateDataArray(json, unappendedPosts,unappended_part_count);
 				
 				
 			} 
@@ -208,14 +216,16 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		
 		if(appendedPosts != null)
 		{
-	    	DataAdapter appended_adapter = new DataAdapter(this, appendedPosts,R.layout.appended_row);		
-			appended_listview.setAdapter(appended_adapter); 
+			DataAdapterForStory appended_adapter = new DataAdapterForStory(this,this, appendedPosts,R.layout.appended_row,R.id.btn_like_appended);		
+			appended_listview.setAdapter(appended_adapter);
+	    	
 		}		
 	    	
     	if(unappendedPosts != null)
     	{
-    		DataAdapter unappended_adapter = new DataAdapter(this, unappendedPosts,R.layout.unappended_row);		
-    			Unappended_listview.setAdapter(unappended_adapter); 
+    		DataAdapterForStory unappended_adapter = new DataAdapterForStory(this,this, unappendedPosts,R.layout.unappended_row,R.id.btn_like_unappended);		
+    		unappended_adapter.showIsSuggestedEndText=true;
+    		Unappended_listview.setAdapter(unappended_adapter); 
     	}
 				
  	    
@@ -227,7 +237,8 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
     {
         //to be sent to server 
     	data = new HashMap<String, Object>();    	
-    	data.put("pid",pid);    	
+    	data.put("pid",pid);    
+    	data.put("nid", nid);
     	
     	//reply tokens
     	replyTokens = new String[4];
@@ -243,12 +254,15 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
     }
 	/* ---------FOR FETCHING DATA FROM SERVER ENDS------*/ 
 
+    
+    
+    
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{
 		// TODO Auto-generated method stub
 		
 		//Toast.makeText(getApplicationContext(), "HUmm", Toast.LENGTH_LONG).show();
-		
+		//Log.d("CLCKED","CLICKED");
 		appendedPid = unappendedPosts[position].pid;
 		showPopUp(R.layout.append_confirm_popup, R.id.btn_append_close_popup,position);
 		

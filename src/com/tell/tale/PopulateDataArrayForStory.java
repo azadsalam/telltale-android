@@ -18,6 +18,13 @@ public class PopulateDataArrayForStory
 				Log.d("ONGOING ROW "+i+" : "," -> "+row);
 				
 
+				/*
+				 
+				
+				Log.d("TRACK END of row "+i,json.getString("isSuggestedEnd"));
+				
+				Log.d("isSuggestedEnd " +i,json.getString("isSuggestedEnd") );
+			*/
 				JSONObject json = new JSONObject(row);
 				
 				dataArray[i] = new Data();
@@ -27,6 +34,11 @@ public class PopulateDataArrayForStory
 				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
 				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
 				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
+				
+				
+				if(json.has("isSuggestedEnd")==true && json.getString("isSuggestedEnd") != null)
+					dataArray[i].isSuggestedEnd = (json.getString("isSuggestedEnd").equals("1"))?true:false;
+				
 				int tmp = Integer.parseInt(json.getString("is_liked"));
 				dataArray[i].isLikedByUser = (tmp==0)?false:true;
 				

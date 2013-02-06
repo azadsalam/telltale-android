@@ -46,7 +46,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		
 		getData();
 	}
-	
+	/*
     // this class is for your data , customize it , as you want
     class Data
     {
@@ -62,7 +62,7 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
     	
     }
     
-	
+	*/
 	Data dataArray[];
 	   // function for creating dummydata , just for example , 
     // you will populate your own data (whatever it may be, static data, or fetched from internet)

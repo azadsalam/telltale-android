@@ -20,7 +20,7 @@
         android:text="@string/likeCount"
         android:textAppearance="?android:attr/textAppearanceSmall" 
         android:gravity="right"
-        android:visibility="gone"
+
         />
 
     <TextView
@@ -44,6 +44,9 @@
         android:layout_width="60dp"
         android:layout_height="47dp"
         android:background="@drawable/like_image"
-        android:text="" />
+        android:text="" 
+        android:focusable="false"
+		android:focusableInTouchMode="false"
+/>
 
 </LinearLayout>

@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,OnItemClickListener
 {
@@ -96,20 +97,20 @@ public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,On
 		{
 		    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		    
-		    View rowView = inflater.inflate(R.layout.appended_row, parent, false);
+		    View rowView = inflater.inflate(R.layout.my_completed_feed_row, parent, false);
 		    
 		    
 		    if(data[position]!=null)
 		    {
-			    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
+			    TextView text = (TextView) rowView.findViewById(R.id.tv_my_completed_row_text);
 			    text.setText(data[position].text);
 			    
-			    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
-			    likeCount.setText(""+data[position].likeCount);
+			    //TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
+			    //likeCount.setText(""+data[position].likeCount);
 			    
 	
-			    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
-			    username.setText(data[position].username);
+			   // TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
+			   // username.setText(data[position].username);
 		    }
 //		    Log.d("UN",data[position].username);
 		    
@@ -123,10 +124,11 @@ public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,On
 
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
-		
+		Log.d("CLICKED!!","CLICKED");
 		Data data = dataArray[position];
 		if(data != null)
 		{
+			
 			Intent intent = new Intent(this,ViewFullStory.class);
 			Bundle xtra = new Bundle();
 			xtra.putInt("pid", data.pid);
@@ -167,7 +169,7 @@ public class MyCompleteStoriesFeed extends Activity implements WebServiceUser,On
 				//dataArray[i].username = json.getString("name");
 				dataArray[i].text = json.getString("text");
 				dataArray[i].pid = Integer.parseInt(json.getString("pid"));
-				dataArray[i].nid = Integer.parseInt(json.getString("nid"));
+				//dataArray[i].nid = Integer.parseInt(json.getString("nid"));
 				dataArray[i].likeCount = Integer.parseInt(json.getString("vote"));
 				
 				
