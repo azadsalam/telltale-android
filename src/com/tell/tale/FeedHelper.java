@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,6 +42,8 @@ public class FeedHelper
 	Button btn_see_more;
 	ListView listView;
 	OnItemClickListener onItemClickListener; 
+	
+	Boolean myOwn=false;
 	public FeedHelper(WebServiceUser user,Context context,OnItemClickListener onItemClickListener ,ListView listView,Button btn_see_more, HashMap<String, Object> data,String [] replyTokens,String url) 
 	{
 		// TODO Auto-generated constructor stub
@@ -63,6 +66,12 @@ public class FeedHelper
     	WebServiceAdapter wsu;
 		data.put("start",new String(""+start));
     	data.put("count",new String(""+increment));
+    	if(myOwn)
+    	{
+    		SharedPreferences myPrefs = context.getSharedPreferences("telltaleprefs", context.MODE_WORLD_READABLE);
+    		int nid = myPrefs.getInt("nid", 0);
+    		data.put("nid", new String(""+nid));
+    	}
     	
     	replyTokens = new String[increment];
     	
@@ -78,6 +87,12 @@ public class FeedHelper
 		wsu.startWebService();
 		
     }
+	
+	public void onClick(View v) 
+	{
+		// TODO Auto-generated method stub		
+		getData(count, increment);
+	}	
 	
 	public void processResult(HashMap<String, Object> data) 
 	{
@@ -115,10 +130,14 @@ public class FeedHelper
 				
 				temp[i] = new Data();
 				temp[i].id = (i);
-				temp[i].username = json.getString("name");
+				
+				if(json.has("name")) temp[i].username = json.getString("name");
+				
 				temp[i].text = json.getString("text");
 				temp[i].pid = Integer.parseInt(json.getString("pid"));
-				temp[i].nid = Integer.parseInt(json.getString("nid"));
+				
+				if(json.has("nid")) temp[i].nid = Integer.parseInt(json.getString("nid"));
+				
 				temp[i].likeCount = Integer.parseInt(json.getString("vote"));
 				
 				count++;
@@ -182,12 +201,15 @@ public class FeedHelper
 			    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
 			    text.setText(data[position].text);
 			    
-			    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
-			    likeCount.setText(""+data[position].likeCount);
-			    
-	
-			    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
-			    username.setText(data[position].username);
+			    if(myOwn == false)
+			    {
+				    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
+				    likeCount.setText(""+data[position].likeCount);
+				    
+		
+				    TextView username = (TextView) rowView.findViewById(R.id.tv_id_username);
+				    username.setText(data[position].username);
+			    }
 		    }
 //		    Log.d("UN",data[position].username);
 		    

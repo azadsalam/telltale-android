@@ -58,10 +58,12 @@ public class TellTaleActivity extends Activity implements OnClickListener,WebSer
 		case R.id.login:
 			//Toast.makeText(getApplicationContext(), "Logging In...", Toast.LENGTH_SHORT).show();
 			
-			
+			//intent = new Intent(this,TabbedHome.class);
 			intent = new Intent(this,HomeActivity.class);
 			startActivity(intent);
 			this.finish();
+			
+			
 			/* FOR NOW DISABLE LOG IN
 			WebServiceAdapter wsu;
 			data.put("mail",mail.getText().toString());

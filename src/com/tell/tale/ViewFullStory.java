@@ -175,7 +175,7 @@ public class ViewFullStory extends Activity implements WebServiceUser
 		if(posts != null)
 		{
 		
-	    	DataAdapterForStory	 appended_adapter = new DataAdapterForStory(this,this, posts,R.layout.appended_row,R.id.btn_like_appended);		
+	    	DataAdapterForStory	 appended_adapter = new DataAdapterForStory(this,this, posts,R.layout.appended_row_new,R.id.btn_like_appended);		
 			listview.setAdapter(appended_adapter); 
 			
 		}		

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,15 @@ public class Profile extends Activity implements WebServiceUser
 	public void processResult(HashMap<String, Object> data) 
 	{
 		// TODO Auto-generated method stub
-		
-		if(data != null)
+		if(((Boolean)data.get("error")).booleanValue()==true)
 		{
+			Toast.makeText(this, "Could Not Connect to Server!", Toast.LENGTH_LONG).show();
+			Log.d("net ->","not found");
+			
+		}
+		else if(data != null)
+		{
+			
 			String initiateCount = (data.get(replyTokens[0]).toString());
 			String commentCount = (data.get(replyTokens[1]).toString());
 			String appenddedCount = (data.get(replyTokens[2]).toString());

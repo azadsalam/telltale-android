@@ -58,7 +58,8 @@ class DataAdapterForStory extends ArrayAdapter<Data> implements OnClickListener
 		
 		
 	    TextView text = (TextView) rowView.findViewById(R.id.tv_id_text);
-	    text.setText(data[position].text);
+	    //data[position].text.t
+	    text.setText(data[position].text.trim());
 	    
 	    TextView likeCount = (TextView) rowView.findViewById(R.id.tv_id_likeCount);
 	    likeCount.setText(""+data[position].likeCount);

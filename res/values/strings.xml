@@ -44,5 +44,7 @@
     <string name="hey">Hi !! </string>
     <string name="tv_appended_part">Appended Part</string>
     <string name="tv_unappended_part">Unappended Part</string>
+    <string name="tv_confirm_delete">Are you sure you want to delete this post? \nAll progress following this will be lost </string>
+    <string name="btn_confirm_delete">Delete !!</string>
     
 </resources>

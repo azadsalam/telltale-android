@@ -12,23 +12,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class OnGoingFeed extends Activity implements OnItemClickListener,WebServiceUser
+public class OnGoingFeed extends Activity implements OnItemClickListener,WebServiceUser,OnClickListener
 {
 	String replyTokens[] ;
-	HashMap<String, Object> data ;    				
-	
-	int start = 0;
+	HashMap<String, Object> data ; 
+	FeedHelper feedHelper;
+	Data dataArray[];
+
+	/*int start = 0;
 	int count = 10;
-	
+	*/
 	ListView listView;
+	Button btn_see_more ;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -37,36 +44,30 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		setContentView(R.layout.ongoing_feed);
 		
 		
-		data = new HashMap<String, Object>();    				
+		data = new HashMap<String, Object>();  
+		
 	       
 		//lv = (ListView) findViewById(R.id.listView_id_ongoing_feed);
 		
 		listView = (ListView) findViewById(R.id.listView_id_ongoing_feed);
-		
-		
-		getData();
-	}
-	/*
-    // this class is for your data , customize it , as you want
-    class Data
-    {
+		btn_see_more = (Button) findViewById(R.id.btn_see_more_completed_feed);
+		btn_see_more.setOnClickListener(this);
 
-    	int id;
-    	
-    	int pid;
-    	int nid;
-    	int likeCount;
-    	String text;
-    	String username;
-    	//(first post er pid, text, nid and like count , nid er name)
-    	
-    }
-    
-	*/
-	Data dataArray[];
+		
+		String url = (Session.baseUrl+"/index.php/ongoingStory_feed/androidQuery");
+		feedHelper = new FeedHelper(this,this,this,listView,btn_see_more,data,replyTokens,url);
+		
+		
+		
+		
+		
+		feedHelper.getData(feedHelper.count,feedHelper.increment);
+		//getData();
+	}
 	   // function for creating dummydata , just for example , 
     // you will populate your own data (whatever it may be, static data, or fetched from internet)
-    public void getData()
+    
+	/*public void getData()
     {
     	
 
@@ -89,7 +90,9 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		
     	
     }
+    */
 
+	/*
 	
 	
 	class DataAdapter extends ArrayAdapter<Data>
@@ -133,12 +136,13 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 	
 	}
 
-
+*/
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
-		if(dataArray[position] != null)
+		Data data = feedHelper.dataArray[position];
+		if(data != null)
 		{
-			Data data = dataArray[position];
+			
 			Intent intent = new Intent(this,ViewOnGoingStory.class);
 			Bundle xtra = new Bundle();
 			xtra.putInt("pid", data.pid);
@@ -157,6 +161,11 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		
 		
 		// [pid] => 9 [nid] => 1 [text] => HELLO [name] => Azad [vote] => 0
+		
+
+		feedHelper.processResult(data);
+		
+		/*
 		dataArray = new Data[count];
 		for (int i=0;i<count;i++)
 		{
@@ -205,6 +214,11 @@ public class OnGoingFeed extends Activity implements OnItemClickListener,WebServ
 		listView.setAdapter(adapter); 
 		// pass the context(this) and the dataArray to fillup your listView (dataArray)
 		listView.setOnItemClickListener(this); 
+		*/
+	}
 
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		feedHelper.onClick(v);
 	}	
 }

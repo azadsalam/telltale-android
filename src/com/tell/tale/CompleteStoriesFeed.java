@@ -51,8 +51,6 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 		feedHelper = new FeedHelper(this,this,this,listView,btn_see_more,data,replyTokens,url);
 		
 		
-		
-		
 		feedHelper.getData(feedHelper.count,feedHelper.increment);
 
 	}
@@ -126,6 +124,7 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
 		
+		/*CHANGE HERE !!!*/
 		Data data = feedHelper.dataArray[position];
 		if(data != null)
 		{
@@ -224,6 +223,6 @@ public class CompleteStoriesFeed extends Activity implements WebServiceUser,OnIt
 	public void onClick(View v) 
 	{
 		// TODO Auto-generated method stub		
-		feedHelper.getData(feedHelper.count	, feedHelper.increment);
+		feedHelper.onClick(v);
 	}	
 }

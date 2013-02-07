@@ -13,22 +13,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MyOngoingFeedActivity extends Activity implements OnItemClickListener,WebServiceUser
+public class MyOngoingFeedActivity extends Activity implements OnItemClickListener,WebServiceUser,OnClickListener
 {
 	String replyTokens[] ;
 	HashMap<String, Object> data ;    				
 	
+	/*
 	int start = 0;
 	int count = 10;
-	
+	*/
+
+	FeedHelper feedHelper;
 	ListView listView;
-	
+	Button btn_see_more ;
+
 	int nid;
 	Data dataArray[];
 	
@@ -47,12 +53,25 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 		//lv = (ListView) findViewById(R.id.listView_id_ongoing_feed);
 		
 		listView = (ListView) findViewById(R.id.lv_my_ongoing_feed);
-		getData();
+		
+		btn_see_more = (Button) findViewById(R.id.btn_my_ongoing_feed_see_more);
+		btn_see_more.setOnClickListener(this);
+
+
+		String url = (Session.baseUrl+"/index.php/personalOngoingStory_feed/my_ongoing_feed_from_android");
+		feedHelper = new FeedHelper(this,this,this,listView,btn_see_more,data,replyTokens,url);
+		feedHelper.myOwn = true;
+		
+	
+		feedHelper.getData(feedHelper.count,feedHelper.increment);
+
+		//getData();
 
 	}
 	
 	   // function for creating dummydata , just for example , 
 	 // you will populate your own data (whatever it may be, static data, or fetched from internet)
+	/*
 	 public void getData()
 	 {
 	 	
@@ -111,13 +130,13 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 		 }
 
 	}
-
+	*/
 
 	public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 	{ 
-		if(dataArray[position] != null)
+		Data data = feedHelper.dataArray[position];
+		if(data != null)
 		{
-			Data data = dataArray[position];
 			Intent intent = new Intent(this,AppendSuggestionActivity.class);
 			Bundle xtra = new Bundle();
 			xtra.putInt("pid", data.pid);
@@ -130,12 +149,15 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 
 	public void processResult(HashMap<String, Object> data) 
 	{
+		
+		feedHelper.processResult(data);
 		// TODO Auto-generated method stub
 		
 		//Toast.makeText(getApplicationContext(), (CharSequence) data, Toast.LENGTH_LONG).show();
 		
 		
 		// [pid] => 9 [nid] => 1 [text] => HELLO [name] => Azad [vote] => 0
+		/*
 		dataArray = new Data[count];
 		for (int i=0;i<count;i++)
 		{
@@ -181,7 +203,13 @@ public class MyOngoingFeedActivity extends Activity implements OnItemClickListen
 		listView.setAdapter(adapter); 
 		// pass the context(this) and the dataArray to fillup your listView (dataArray)
 		listView.setOnItemClickListener(this); 
+		*/
+	}
 
+	public void onClick(View v) 
+	{
+		// TODO Auto-generated method stub
+		feedHelper.onClick(v);
 	}
 	
 

@@ -53,7 +53,10 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 	int nid;
 	//Last appended
 	int pid;
+	
+	DeletePost deletePost;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -68,16 +71,26 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		SharedPreferences myPrefs = getSharedPreferences("telltaleprefs",MODE_WORLD_READABLE);
 		nid = myPrefs.getInt("nid", 0);
 		
+		
+		
 		// FOR VIEWING APPENDED POSTS
         appended_listview = (ListView) findViewById(R.id.lv_append_suggestion_appended); 
         Unappended_listview = (ListView)findViewById(R.id.lv_append_suggestion_unappended);
         Unappended_listview.setOnItemClickListener(this);
 
+        deletePost = new DeletePost(this,this,this);
+		appended_listview.setOnItemClickListener(deletePost);
+        
 		//FETCH STORY FROM SERVER
         prepareData();
 		wsu = new WebServiceAdapter(this,this,"Loading Story!!",Session.baseUrl+ "/index.php/ongoingStory_feed/getFullStoryFromAndroid",data,replyTokens);        
         startWebService();
 
+	}
+	
+	public Data[] getAppendedPostArray()
+	{
+		return appendedPosts;
 	}
 	/*
 	class DataAdapter extends ArrayAdapter<Data> 
@@ -263,6 +276,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		
 		//Toast.makeText(getApplicationContext(), "HUmm", Toast.LENGTH_LONG).show();
 		//Log.d("CLCKED","CLICKED");
+		
 		appendedPid = unappendedPosts[position].pid;
 		showPopUp(R.layout.append_confirm_popup, R.id.btn_append_close_popup,position);
 		
@@ -316,7 +330,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 		xtra.putInt("pid", pid);
 		intent.putExtras(xtra);
 		startActivity(intent);
-		//finish();
+		finish();
 	}
 	
 
@@ -334,7 +348,7 @@ public class AppendSuggestionActivity extends Activity implements OnItemClickLis
 			
 		   	data = new HashMap<String, Object>();    	
 	    	data.put("pid",appendedPid);    	
-			wsu = new WebServiceAdapter(this,c,"Updating your story!!",Session.baseUrl + "/index.php/add_comment/appendFromAndroid",data,replyTokens);        
+			wsu = new WebServiceAdapter(this,c,"Updating your story!!",Session.baseUrl + "/index.php/add_comment/appendFromAndroid",data,replyTokens,false);        
 	        startWebService();
 
 	    	
