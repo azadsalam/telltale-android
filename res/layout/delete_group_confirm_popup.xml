@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/background_light"
+    android:orientation="vertical" >
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:background="@color/popup_back"
+        android:orientation="vertical" >
+
+     >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_delete_grp_popup_confirm"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_orandge" />
+
+    <TextView
+        android:id="@+id/tv_delete_group_confirm_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_dark_green" />
+
+    <TextView
+        android:id="@+id/tv_append_confirm_isSuggestedEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_delete_group_popup_warning"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/R" />
+
+    <Button
+        android:id="@+id/btn_approve_append_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_delete_group_confirm" />
+
+    <Button
+        android:id="@+id/btn_delete_confirm_popup_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_cancel" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

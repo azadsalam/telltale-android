@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_select_group" 
+    	android:textAppearance="?android:attr/textAppearanceMedium"
+     	android:textColor="@color/text_orandge"
+        />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="100dip"
+        android:layout_weight="0.75" >
+
+        <RadioGroup
+            android:id="@+id/rg_groups_i_own"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </RadioGroup>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_add_remove_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_add_remove_member_from_group" />
+
+    <Button
+        android:id="@+id/btn_delete_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_delete_group" />
+    
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:background="@drawable/button_shape"
+            android:text="@string/btn_back" />
+
+</LinearLayout>

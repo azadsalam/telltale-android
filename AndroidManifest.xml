@@ -32,6 +32,10 @@
         <activity android:name="MyCompleteStoriesFeed"></activity>
         <activity android:name="Profile"></activity>
         <activity android:name="TabbedHome"></activity>
+        <activity android:name="GroupManagementActivity"></activity>
+        <activity android:name="CreateGroupActivity"></activity>
+        <activity android:name="ListGroupIOwn"></activity>
+        <activity android:name="ListGroupsIAmIn"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back"
+    android:orientation="vertical" >
+        <include 
+        layout="@layout/top"/>
+
+    <Button
+        android:id="@+id/btn_create_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_create_group" />
+
+    <Button
+        android:id="@+id/btn_see_my_created_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_list_my_created_group" />
+
+    <Button
+        android:id="@+id/btn_see_groups_i_am_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_list_groups_i_am_in" />
+    
+</LinearLayout>

@@ -13,49 +13,38 @@
 
     <include 
         layout="@layout/top"/>
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_text_username"
-         />
-
+
+       <TextView
+           android:id="@+id/tv_my_ongoing_row_text"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/tv_enter_group_name"
+           android:textAppearance="?android:attr/textAppearanceLarge"
+           android:textColor="@color/text_dark_green" />
+
     <EditText
-        android:id="@+id/editText_id_mail"
+        android:id="@+id/et_group_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 	
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_text_password" />
-
-    <EditText
-        android:id="@+id/editText_id_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword" />
-
+
     <Button
-        android:id="@+id/login"
+        android:id="@+id/btn_create_group_from_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dip"
         android:background="@drawable/button_shape"
-        android:text="@string/btn_text_login" />
-
+        android:text="@string/btn_create_group" />
+
     <Button
-        android:id="@+id/btn_registration"
+        android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/btn_text_reg" 
+        android:layout_marginBottom="5dip"
         android:background="@drawable/button_shape"
-        android:layout_marginBottom="5dip"        
-     />
+        android:text="@string/btn_back" />
 
 </LinearLayout>

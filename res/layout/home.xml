@@ -54,5 +54,13 @@
         android:layout_marginBottom="5dip"
         android:background="@drawable/button_shape"
         android:text="@string/btn_my_initiated_stories" />
-
+
+    <Button
+        android:id="@+id/btn_group_management"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@drawable/button_shape"
+        android:text="@string/btn_grp_managemement" />
+    
 </LinearLayout>
